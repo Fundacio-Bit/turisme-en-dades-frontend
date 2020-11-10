@@ -76,7 +76,10 @@ const SampleTable = () => {
   ];
 
   return (
-    <div style={{ width: "80%", margin: "auto", marginTop: "20px" }}>
+    <div style={{ margin: "2%", marginTop: "20px" }}>
+      <h4 style={{ textAlign: "left", color: "#1DA57A", fontWeight: 500 }}>
+        {dataInput.title.ca}
+      </h4>
       <Table dataSource={formattedRows} columns={columns} />;
     </div>
   );
