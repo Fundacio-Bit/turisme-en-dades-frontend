@@ -1,12 +1,11 @@
 // import { Button } from "antd";
-import SampleTable from "./Components/SampleTable";
-import MenuBar from "./Components/MenuBar";
+import Dashboard from "./Components/Dashboard";
+
 import "./App.less";
 
 const App = () => (
   <div className="App">
-    <MenuBar></MenuBar>
-    <SampleTable></SampleTable>
+    <Dashboard></Dashboard>
   </div>
 );
 
