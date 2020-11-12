@@ -1,54 +1,8 @@
 import React from "react";
 import { Table } from "antd";
 
-const TouristArrivalsTable = () => {
-  const dataInput = {
-    title: {
-      ca: "Arribada de turistes",
-    },
-    columns: [
-      {
-        ca: "ILLES BALEARS",
-      },
-      {
-        ca: "% VAR. 20/19",
-      },
-    ],
-    rows: [
-      {
-        name: {
-          ca: "total (milions d'€)",
-        },
-        values: ["2.210,0", "-82,1"],
-      },
-      {
-        name: {
-          ca: "per persona (€)",
-        },
-        values: ["883,1", "-12,6"],
-      },
-      {
-        name: {
-          ca: "per persona i dia",
-        },
-        values: ["120,2", "-21,5"],
-      },
-      {
-        name: {
-          ca: "pernoctacions",
-        },
-        values: ["18.391.826", "-77,2"],
-      },
-      {
-        name: {
-          ca: "estada mitjana",
-        },
-        values: ["7,3", "11,3"],
-      },
-    ],
-  };
-
-  const formattedRows = dataInput.rows.map((row, i) => {
+const TouristArrivalsTable = (props) => {
+  const formattedRows = props.data.rows.map((row, i) => {
     return {
       key: i,
       rowName: row.name.ca,
@@ -64,12 +18,12 @@ const TouristArrivalsTable = () => {
       key: "rowName",
     },
     {
-      title: dataInput.columns[0].ca,
+      title: props.data.columns[0].ca,
       dataIndex: "total",
       key: "total",
     },
     {
-      title: dataInput.columns[1].ca,
+      title: props.data.columns[1].ca,
       dataIndex: "percent",
       key: "percent",
     },
@@ -78,9 +32,9 @@ const TouristArrivalsTable = () => {
   return (
     <div style={{ margin: "2%", marginTop: "20px" }}>
       <h4 style={{ textAlign: "left", color: "#1DA57A", fontWeight: 500 }}>
-        {dataInput.title.ca}
+        {props.data.title.ca}
       </h4>
-      <Table dataSource={formattedRows} columns={columns} />
+      <Table dataSource={formattedRows} columns={columns} pagination={false} />
     </div>
   );
 };
