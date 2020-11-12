@@ -1,10 +1,10 @@
 import React from "react";
 import { Table } from "antd";
 
-const SampleTable = () => {
+const AirPassengersTable = () => {
   const dataInput = {
     title: {
-      ca: "Despesa dels turistes",
+      ca: "Arribada de passatgers marítims (via regular i creueristes)",
     },
     columns: [
       {
@@ -85,4 +85,4 @@ const SampleTable = () => {
   );
 };
 
-export default SampleTable;
+export default AirPassengersTable;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 
-const SampleTable = () => {
+const SpendingTable = () => {
   const dataInput = {
     title: {
       ca: "Despesa dels turistes",
@@ -85,4 +85,4 @@ const SampleTable = () => {
   );
 };
 
-export default SampleTable;
+export default SpendingTable;
