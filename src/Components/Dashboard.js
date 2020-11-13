@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import SpendingTable from "./SpendingTable";
 import TouristArrivalsTable from "./TouristArrivalsTable";
@@ -14,62 +14,130 @@ import UnemployedTable from "./UnemployedTable";
 import TemporalityTable from "./TemporalityTable";
 import CompaniesTable from "./CompaniesTable";
 
+import { Row, Col } from "antd";
+
 import MenuBar from "./MenuBar";
+import axios from "axios";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("ecs_tourist_arrivals");
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const sectionIds = [
+      {
+        _id: "5fad0695e5fedf3df0e77be1",
+        section: "ecs_tourist_arrivals",
+        title: {
+          ca: "ARRIBADA DE TURISTES / AGOST 2020",
+        },
+      },
+      {
+        _id: "5fad0d1ae5fedf3df0e77be2",
+        section: "ecs_tourist_arrivals",
+        title: {
+          ca: "ARRIBADA DE TURISTES / GENER-AGOST 2020",
+        },
+      },
+      {
+        _id: "5fad0fbfe5fedf3df0e77be3",
+        section: "ecs_spending",
+        title: {
+          ca: "DESPESA DELS TURISTES / AGOST 2020  ",
+        },
+      },
+      {
+        _id: "5fad1be4e5fedf3df0e77be4",
+        section: "ecs_spending",
+        title: {
+          ca: "DESPESA DELS TURISTES / GENER-AGOST 2020",
+        },
+      },
+      {
+        _id: "5fad238de5fedf3df0e77be5",
+        section: "ecs_spending",
+        title: {
+          ca: "DESPESA DELS TURISTES / AGOST 2020  TOTAL",
+        },
+      },
+      {
+        _id: "5fad23abe5fedf3df0e77be6",
+        section: "ecs_spending",
+        title: {
+          ca: "DESPESA DELS TURISTES / GENER-AGOST 2020 TOTAL",
+        },
+      },
+      {
+        _id: "5fad23cde5fedf3df0e77be7",
+        section: "ecs_spending",
+        title: {
+          ca: "PERNOCTACIONS I ESTADA MITJANA / AGOST 2020  ",
+        },
+      },
+      {
+        _id: "5fad23e8e5fedf3df0e77be8",
+        section: "ecs_spending",
+        title: {
+          ca: "PERNOCTACIONS I ESTADA MITJANA / AGOST 2020 PER ILLA",
+        },
+      },
+      {
+        _id: "5fad2b76e5fedf3df0e77bec",
+        section: "ecs_spending",
+        title: {
+          ca: "PERNOCTACIONS I ESTADA MITJANA / GENER - AGOST 2020  ",
+        },
+      },
+      {
+        _id: "5fad2bc0e5fedf3df0e77bed",
+        section: "ecs_spending",
+        title: {
+          ca: "PERNOCTACIONS I ESTADA MITJANA / GENER-AGOST 2020 PER ILLA",
+        },
+      },
+    ];
+    axios
+      .post(
+        "http://54.77.111.120:5300/login",
+        {
+          username: "admin",
+          password: "Admin2020_",
+        },
+        { headers: headers }
+      )
+      .then((response) => {
+        let currentSectionIds = sectionIds.filter(
+          (item) => item.section === activeSection
+        );
+
+        let requests = currentSectionIds.map((sectionId) =>
+          axios.get(
+            `http://54.77.111.120:5300/data-grids/${sectionId._id}?token=${response.data.token}`
+          )
+        );
+
+        return axios.all(requests);
+      })
+      .then(
+        axios.spread((...responses) => {
+          console.log("axios response 3", responses);
+          setData(responses.map((resp) => resp.data));
+        })
+      )
+
+      .catch((error) => {
+        console.log("axios error", error);
+      });
+  }, [activeSection]);
 
   const handleMenuSelection = (e) => {
     setActiveSection(e.key);
   };
 
   const selectedView = (view) => {
-    const dataInput = {
-      title: {
-        ca: "Arribada de turistes",
-      },
-      columns: [
-        {
-          ca: "ILLES BALEARS",
-        },
-        {
-          ca: "% VAR. 20/19",
-        },
-      ],
-      rows: [
-        {
-          name: {
-            ca: "total (milions d'€)",
-          },
-          values: ["2.210,0", "-82,1"],
-        },
-        {
-          name: {
-            ca: "per persona (€)",
-          },
-          values: ["883,1", "-12,6"],
-        },
-        {
-          name: {
-            ca: "per persona i dia",
-          },
-          values: ["120,2", "-21,5"],
-        },
-        {
-          name: {
-            ca: "pernoctacions",
-          },
-          values: ["18.391.826", "-77,2"],
-        },
-        {
-          name: {
-            ca: "estada mitjana",
-          },
-          values: ["7,3", "11,3"],
-        },
-      ],
-    };
-
     const touristArrivalChartsData = {
       mallorca: [
         { name: "Espanya", value: 187215 },
@@ -112,7 +180,18 @@ const Dashboard = () => {
       case "ecs_tourist_arrivals":
         return (
           <div>
-            <TouristArrivalsTable data={dataInput}></TouristArrivalsTable>
+            <Row>
+              {data &&
+                data.map((tableInput, i) => (
+                  <Col span={12} style={{ padding: 20 }}>
+                    <TouristArrivalsTable
+                      key={i}
+                      data={tableInput}
+                    ></TouristArrivalsTable>
+                  </Col>
+                ))}
+            </Row>
+
             <TouristArrivalsChartsContainer
               data={touristArrivalChartsData}
             ></TouristArrivalsChartsContainer>
@@ -121,10 +200,21 @@ const Dashboard = () => {
       case "ecs_spending":
         return (
           <div>
-            <SpendingTable data={dataInput}></SpendingTable>
-            <SpendingChartsContainer
+            <Row>
+              {data &&
+                data.map((tableInput, i) => (
+                  <Col span={12} style={{ padding: 20 }}>
+                    <TouristArrivalsTable
+                      key={i}
+                      data={tableInput}
+                    ></TouristArrivalsTable>
+                  </Col>
+                ))}
+            </Row>
+
+            <TouristArrivalsChartsContainer
               data={touristArrivalChartsData}
-            ></SpendingChartsContainer>
+            ></TouristArrivalsChartsContainer>
           </div>
         );
 
