@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import SpendingTable from "./SpendingTable";
 import TouristArrivalsTable from "./TouristArrivalsTable";
 import TouristArrivalsChartsContainer from "./TouristArrivalsChartsContainer";
-import SpendingChartsContainer from "./SpedingChartsContainer";
+// import SpendingChartsContainer from "./SpedingChartsContainer";
 import OccupancyTable from "./OccupancyTable";
 import AirPassengersTable from "./AirPassengersTable";
 import SeaPassengersTable from "./SeaPassengersTable";
@@ -13,8 +13,6 @@ import AffiliatesTable from "./AffiliatesTable";
 import UnemployedTable from "./UnemployedTable";
 import TemporalityTable from "./TemporalityTable";
 import CompaniesTable from "./CompaniesTable";
-
-import { Row, Col } from "antd";
 
 import MenuBar from "./MenuBar";
 import axios from "axios";
@@ -110,7 +108,7 @@ const Dashboard = () => {
       )
       .then((response) => {
         let currentSectionIds = sectionIds.filter(
-          (item) => item.section === activeSection
+          (item) => item.section === "ecs_tourist_arrivals" //TODO; change for active section (manage crash when navifating)
         );
 
         let requests = currentSectionIds.map((sectionId) =>
@@ -179,44 +177,21 @@ const Dashboard = () => {
     switch (view) {
       case "ecs_tourist_arrivals":
         return (
-          <div>
-            <Row>
-              {data &&
-                data.map((tableInput, i) => (
-                  <Col span={12} style={{ padding: 20 }}>
-                    <TouristArrivalsTable
-                      key={i}
-                      data={tableInput}
-                    ></TouristArrivalsTable>
-                  </Col>
-                ))}
-            </Row>
-
+          <div style={{ padding: 20 }}>
             <TouristArrivalsChartsContainer
               data={touristArrivalChartsData}
             ></TouristArrivalsChartsContainer>
+            {data &&
+              data.map((tableInput, i) => (
+                <TouristArrivalsTable
+                  key={i}
+                  data={tableInput}
+                ></TouristArrivalsTable>
+              ))}
           </div>
         );
       case "ecs_spending":
-        return (
-          <div>
-            <Row>
-              {data &&
-                data.map((tableInput, i) => (
-                  <Col span={12} style={{ padding: 20 }}>
-                    <TouristArrivalsTable
-                      key={i}
-                      data={tableInput}
-                    ></TouristArrivalsTable>
-                  </Col>
-                ))}
-            </Row>
-
-            <TouristArrivalsChartsContainer
-              data={touristArrivalChartsData}
-            ></TouristArrivalsChartsContainer>
-          </div>
-        );
+        return <SpendingTable></SpendingTable>;
 
       case "ecs_occupancy":
         return <OccupancyTable></OccupancyTable>;
