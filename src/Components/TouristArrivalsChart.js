@@ -94,7 +94,6 @@ const TouristArrivalsChart = (props) => {
         fill="#1DA57A"
         dataKey="value"
         onMouseEnter={onPieEnter}
-        label="Mallorca"
       />
     </PieChart>
   );
