@@ -137,6 +137,7 @@ const Dashboard = () => {
 
   const selectedView = (view) => {
     const touristArrivalChartsData = {
+      title: { ca: "ARRIBADA DE TURISTES / AGOST 2020" },
       mallorca: [
         { name: "Espanya", value: 187215 },
         { name: "Alemanya", value: 124094 },
