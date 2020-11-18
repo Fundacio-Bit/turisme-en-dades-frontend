@@ -1,30 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-import SpendingTable from "./SpendingTable";
-import TouristArrivalsTable from "./TouristArrivalsTable";
-import TouristArrivalsChartsContainer from "./TouristArrivalsChartsContainer";
-// import SpendingChartsContainer from "./SpedingChartsContainer";
-import OccupancyTable from "./OccupancyTable";
-import AirPassengersTable from "./AirPassengersTable";
-import SeaPassengersTable from "./SeaPassengersTable";
-import EnergyDemandTable from "./EnergyDemandTable";
-import HumanPressureTable from "./HumanPressureTable";
-import AffiliatesTable from "./AffiliatesTable";
-import UnemployedTable from "./UnemployedTable";
-import TemporalityTable from "./TemporalityTable";
-import CompaniesTable from "./CompaniesTable";
+import DataTable from "./DataTable";
 
-import MenuBar from "./MenuBar";
+import TouristArrivalsChartsContainer from "./TouristArrivalsChartsContainer";
+
 import axios from "axios";
 
-const Dashboard = () => {
-  const [activeSection, setActiveSection] = useState("ecs_tourist_arrivals");
+const Dashboard = (props) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const headers = {
-      "Content-Type": "application/json",
-    };
+    console.log("sectUseEffect", props.activeSection);
+    // `http://54.77.111.120:5300/data-grids/summary?token=${apiToken}`
     const sectionIds = [
       {
         _id: "5fad0695e5fedf3df0e77be1",
@@ -57,6 +44,7 @@ const Dashboard = () => {
       {
         _id: "5fad238de5fedf3df0e77be5",
         section: "ecs_spending",
+        type: "total",
         title: {
           ca: "DESPESA DELS TURISTES / AGOST 2020  TOTAL",
         },
@@ -64,6 +52,7 @@ const Dashboard = () => {
       {
         _id: "5fad23abe5fedf3df0e77be6",
         section: "ecs_spending",
+        type: "total",
         title: {
           ca: "DESPESA DELS TURISTES / GENER-AGOST 2020 TOTAL",
         },
@@ -71,6 +60,7 @@ const Dashboard = () => {
       {
         _id: "5fad23cde5fedf3df0e77be7",
         section: "ecs_spending",
+        type: "stays",
         title: {
           ca: "PERNOCTACIONS I ESTADA MITJANA / AGOST 2020  ",
         },
@@ -78,6 +68,7 @@ const Dashboard = () => {
       {
         _id: "5fad23e8e5fedf3df0e77be8",
         section: "ecs_spending",
+        type: "stays",
         title: {
           ca: "PERNOCTACIONS I ESTADA MITJANA / AGOST 2020 PER ILLA",
         },
@@ -85,6 +76,7 @@ const Dashboard = () => {
       {
         _id: "5fad2b76e5fedf3df0e77bec",
         section: "ecs_spending",
+        type: "stays",
         title: {
           ca: "PERNOCTACIONS I ESTADA MITJANA / GENER - AGOST 2020  ",
         },
@@ -92,33 +84,120 @@ const Dashboard = () => {
       {
         _id: "5fad2bc0e5fedf3df0e77bed",
         section: "ecs_spending",
+        type: "stays",
         title: {
           ca: "PERNOCTACIONS I ESTADA MITJANA / GENER-AGOST 2020 PER ILLA",
         },
       },
-    ];
-    axios
-      .post(
-        "http://54.77.111.120:5300/login",
-        {
-          username: "admin",
-          password: "Admin2020_",
+      {
+        _id: "5fae7f9270ad955c4544c38e",
+        section: "ecs_occupancy",
+        title: {
+          ca: "OCUPACIÓ PER PLACES OBERTES / AGOST 2020",
         },
+      },
+      {
+        _id: "5fae7f920dc77d5c4bfaf4ce",
+        section: "ecs_air_passengers_arrivals",
+        title: {
+          ca: "PASSATGERS AERIS (ARRIBADES) / AGOST 2020",
+        },
+      },
+      {
+        _id: "5fae7f9270ad955c4544c38f",
+        section: "ecs_occupancy",
+        title: {
+          ca: "OCUPACIÓ PER PLACES OBERTES / ACUMULAT 2020",
+        },
+      },
+      {
+        _id: "5fae7f920dc77d5c4bfaf4cf",
+        section: "ecs_air_passengers_arrivals",
+        title: {
+          ca: "PASSATGERS AERIS (ARRIBADES) / GENER-AGOST 2020",
+        },
+      },
+
+      {
+        _id: "5fb241b270ad955c4544c394",
+        section: "ecs_sea_passengers_arrivals",
+        title: {
+          ca: " CREUERISTES / AGOST 2020 - Autoritat Portuària",
+        },
+      },
+      {
+        _id: "5fb3b9765d85e95533e27a92",
+        section: "ecs_sea_passengers_arrivals",
+        title: {
+          ca: " CREUERISTES / AGOST 2020 - Ports IB",
+        },
+      },
+      {
+        _id: "5fb3b9760ab2ff553d13ebcc",
+        section: "ecs_sea_passengers_arrivals",
+        title: {
+          ca: " CREUERISTES / GENER-AGOST 2020 - Autoritat Portuària",
+        },
+      },
+      {
+        _id: "5fb3b9760ab2ff553d13ebcd",
+        section: "ecs_sea_passengers_arrivals",
+        title: {
+          ca: " CREUERISTES / GENER-AGOST 2020 - Ports IB",
+        },
+      },
+      {
+        _id: "5fb426715d85e95533e27a95",
+        section: "ecs_sea_passengers_arrivals",
+        title: {
+          ca:
+            "PASSATGERS MARÍTIMS (ARRIBADES) /   AGOST 2020 - Autoritat Portuària",
+        },
+      },
+      {
+        _id: "5fb42ac70ab2ff553d13ebd0",
+        section: "ecs_sea_passengers_arrivals",
+        title: {
+          ca: "PASSATGERS MARÍTIMS (ARRIBADES) /   AGOST 2020 - Ports IB",
+        },
+      },
+      {
+        _id: "5fb42b4f5d85e95533e27a96",
+        section: "ecs_sea_passengers_arrivals",
+        title: {
+          ca:
+            "PASSATGERS MARÍTIMS (ARRIBADES) / GENER-AGOST 2020 - Autoritat Portuària",
+        },
+      },
+      {
+        _id: "5fb42b850ab2ff553d13ebd1",
+        section: "ecs_sea_passengers_arrivals",
+        title: {
+          ca: "PASSATGERS MARÍTIMS (ARRIBADES) / GENER-AGOST 2020 - Ports IB",
+        },
+      },
+    ];
+
+    let currentSectionIds = sectionIds.filter(
+      (item) => item.section === props.activeSection //TODO; change for active section (manage crash when navigating)
+    );
+
+    // PUBLIC API TOKEN (does not expire. Cannot perform actions other than reading)
+    const apiToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyb250ZW5kIiwiaWF0IjoxNjA1NTI0OTkzfQ.E_70V52jXRF-dSNBhCawExXyvTnLuMljsWzjuWuSC9k";
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    let requests = currentSectionIds.map((sectionId) =>
+      axios.get(
+        `http://54.77.111.120:5300/data-grids/${sectionId._id}?token=${apiToken}`,
         { headers: headers }
       )
-      .then((response) => {
-        let currentSectionIds = sectionIds.filter(
-          (item) => item.section === "ecs_tourist_arrivals" //TODO; change for active section (manage crash when navifating)
-        );
+    );
 
-        let requests = currentSectionIds.map((sectionId) =>
-          axios.get(
-            `http://54.77.111.120:5300/data-grids/${sectionId._id}?token=${response.data.token}`
-          )
-        );
-
-        return axios.all(requests);
-      })
+    axios
+      .all(requests)
       .then(
         axios.spread((...responses) => {
           console.log("axios response 3", responses);
@@ -129,11 +208,7 @@ const Dashboard = () => {
       .catch((error) => {
         console.log("axios error", error);
       });
-  }, [activeSection]);
-
-  const handleMenuSelection = (e) => {
-    setActiveSection(e.key);
-  };
+  }, [props.activeSection]);
 
   const selectedView = (view) => {
     const touristArrivalChartsData = {
@@ -184,34 +259,209 @@ const Dashboard = () => {
             ></TouristArrivalsChartsContainer>
             {data &&
               data.map((tableInput, i) => (
-                <TouristArrivalsTable
+                <DataTable
                   key={i}
                   data={tableInput}
-                ></TouristArrivalsTable>
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
               ))}
           </div>
         );
       case "ecs_spending":
-        return <SpendingTable></SpendingTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            <TouristArrivalsChartsContainer
+              data={touristArrivalChartsData}
+            ></TouristArrivalsChartsContainer>
+
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
+
+      // return <SpendingTable></SpendingTable>;
 
       case "ecs_occupancy":
-        return <OccupancyTable></OccupancyTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
+
       case "ecs_air_passengers_arrivals":
-        return <AirPassengersTable></AirPassengersTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
+
       case "ecs_sea_passengers_arrivals":
-        return <SeaPassengersTable></SeaPassengersTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
+
       case "ens_energy_demand":
-        return <EnergyDemandTable></EnergyDemandTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
       case "ens_human_pressure":
-        return <HumanPressureTable></HumanPressureTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
       case "sos_affiliates":
-        return <AffiliatesTable></AffiliatesTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
       case "sos_unemployed":
-        return <UnemployedTable></UnemployedTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
       case "sos_temporality":
-        return <TemporalityTable></TemporalityTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
       case "sos_companies":
-        return <CompaniesTable></CompaniesTable>;
+        return (
+          <div style={{ padding: 20 }}>
+            {data &&
+              data.map((tableInput, i) => (
+                <DataTable
+                  key={i}
+                  data={tableInput}
+                  footer={[
+                    "*Sense interilles",
+                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+                    "(..) Dada no disponible",
+                    "(…) Dada oculta per imprecisa/baixa qualitat.",
+                  ]}
+                ></DataTable>
+              ))}
+          </div>
+        );
 
       default:
         console.log(
@@ -219,16 +469,7 @@ const Dashboard = () => {
         );
     }
   };
-  return (
-    <div>
-      <MenuBar
-        handleMenuSelection={handleMenuSelection}
-        activeSection={activeSection}
-      ></MenuBar>
-
-      {selectedView(activeSection)}
-    </div>
-  );
+  return <div>{selectedView(props.activeSection)}</div>;
 };
 
 export default Dashboard;
