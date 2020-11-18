@@ -4,6 +4,8 @@ import DataTable from "./DataTable";
 
 import TouristArrivalsChartsContainer from "./TouristArrivalsChartsContainer";
 
+import SpendingChartsContainer from "./SpendingChartsContainer";
+
 import axios from "axios";
 
 const Dashboard = (props) => {
@@ -200,7 +202,7 @@ const Dashboard = (props) => {
       .all(requests)
       .then(
         axios.spread((...responses) => {
-          console.log("axios response 3", responses);
+          props.handleLoading();
           setData(responses.map((resp) => resp.data));
         })
       )
@@ -208,55 +210,43 @@ const Dashboard = (props) => {
       .catch((error) => {
         console.log("axios error", error);
       });
-  }, [props.activeSection]);
+  }, [props.activeSection, props]);
 
   const selectedView = (view) => {
-    const touristArrivalChartsData = {
-      title: { ca: "ARRIBADA DE TURISTES / AGOST 2020" },
-      mallorca: [
-        { name: "Espanya", value: 187215 },
-        { name: "Alemanya", value: 124094 },
-        { name: "França", value: 43182 },
-        { name: "Regne Unit", value: 29236 },
-        { name: "Itàlia", value: 11571 },
-        // { name: "Països Baixos", value: 0 },
-        // { name: "Bèlgica", value: 0 },
-        // { name: "Suïssa", value: 0 },
-        { name: "Païssos Nòrdics", value: 12132 },
-        // { name: "Rússia", value: 0 },
-      ],
-      menorca: [
-        { name: "Espanya", value: 123423 },
-        { name: "Alemanya", value: 2179 },
-        { name: "França", value: 11255 },
-        { name: "Regne Unit", value: 4442 },
-        { name: "Itàlia", value: 8789 },
-        // { name: "Països Baixos", value: 0 },
-        // { name: "Bèlgica", value: 0 },
-        // { name: "Suïssa", value: 0 },
-        // { name: "Païssos Nòrdics", value: 0 },
-        // { name: "Rússia", value: 0 },
-      ],
-      ibiza_formentera: [
-        { name: "Espanya", value: 120092 },
-        { name: "Alemanya", value: 13789 },
-        { name: "França", value: 19175 },
-        { name: "Regne Unit", value: 16121 },
-        { name: "Itàlia", value: 29410 },
-        // { name: "Països Baixos", value: 0 },
-        // { name: "Bèlgica", value: 0 },
-        // { name: "Suïssa", value: 0 },
-        // { name: "Païssos Nòrdics", value: 0 },
-        // { name: "Rússia", value: 0 },
-      ],
-    };
     switch (view) {
       case "ecs_tourist_arrivals":
+        const touristArrivalChartsData = {
+          title: { ca: "ARRIBADA DE TURISTES / AGOST 2020" },
+          mallorca: [
+            { name: "Espanya", value: 187215 },
+            { name: "Alemanya", value: 124094 },
+            { name: "França", value: 43182 },
+            { name: "Regne Unit", value: 29236 },
+            { name: "Itàlia", value: 11571 },
+            { name: "Païssos Nòrdics", value: 12132 },
+          ],
+          menorca: [
+            { name: "Espanya", value: 123423 },
+            { name: "Alemanya", value: 2179 },
+            { name: "França", value: 11255 },
+            { name: "Regne Unit", value: 4442 },
+            { name: "Itàlia", value: 8789 },
+          ],
+          ibiza_formentera: [
+            { name: "Espanya", value: 120092 },
+            { name: "Alemanya", value: 13789 },
+            { name: "França", value: 19175 },
+            { name: "Regne Unit", value: 16121 },
+            { name: "Itàlia", value: 29410 },
+          ],
+        };
         return (
           <div style={{ padding: 20 }}>
-            <TouristArrivalsChartsContainer
-              data={touristArrivalChartsData}
-            ></TouristArrivalsChartsContainer>
+            {data && (
+              <TouristArrivalsChartsContainer
+                data={touristArrivalChartsData}
+              ></TouristArrivalsChartsContainer>
+            )}
             {data &&
               data.map((tableInput, i) => (
                 <DataTable
@@ -273,11 +263,54 @@ const Dashboard = (props) => {
           </div>
         );
       case "ecs_spending":
+        const spendingChartsData = {
+          title: { ca: "DESPESA DELS TURISTES / AGOST 2020" },
+          units: {
+            total: { ca: "milions d'€" },
+            person: { ca: "milions d'€" },
+            person_day: { ca: "milions d'€" },
+          },
+          total: [
+            { name: "Espanya (Altres CA)", value: 319.42 },
+            { name: "Alemanya", value: 155.53 },
+            { name: "França", value: 81.47 },
+            { name: "Resta del món", value: 80.07 },
+            { name: "Regne Unit", value: 65.11 },
+            { name: "Benelux", value: 57.94 },
+            { name: "Itàlia", value: 52.7 },
+            { name: "Suïssa", value: 20.07 },
+            { name: "Països nòrdics", value: 18.02 },
+          ],
+          person: [
+            { name: "Espanya (Altres CA)", value: 741.59 },
+            { name: "Alemanya", value: 1110.42 },
+            { name: "França", value: 1106.74 },
+            { name: "Resta del món", value: 1169.4 },
+            { name: "Regne Unit", value: 1307.36 },
+            { name: "Benelux", value: 1247.75 },
+            { name: "Itàlia", value: 1058.89 },
+            { name: "Suïssa", value: 1560.61 },
+            { name: "Països nòrdics", value: 1409.23 },
+          ],
+          person_day: [
+            { name: "Espanya (Altres CA)", value: 88.36 },
+            { name: "Alemanya", value: 139.09 },
+            { name: "França", value: 159.08 },
+            { name: "Resta del món", value: 173.23 },
+            { name: "Regne Unit", value: 113.55 },
+            { name: "Benelux", value: 194.73 },
+            { name: "Itàlia", value: 147.03 },
+            { name: "Suïssa", value: 152.75 },
+            { name: "Països nòrdics", value: 164.7 },
+          ],
+        };
         return (
           <div style={{ padding: 20 }}>
-            <TouristArrivalsChartsContainer
-              data={touristArrivalChartsData}
-            ></TouristArrivalsChartsContainer>
+            {data && (
+              <SpendingChartsContainer
+                data={spendingChartsData}
+              ></SpendingChartsContainer>
+            )}
 
             {data &&
               data
