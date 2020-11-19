@@ -189,6 +189,36 @@ function MainContainer() {
           ca: "ÍNDEX PRESSIÓ HUMANA / JUNY 2020",
         },
       },
+      {
+        _id: "5fb63b5a0ab2ff553d13ebd4",
+        section: "sos_affiliates",
+        title: {
+          ca: "AFILIATS SECTOR TURÍSTIC / 2n TRIMESTRE 2020",
+        },
+      },
+      {
+        _id: "5fb63bfe5d85e95533e27a97",
+        section: "sos_companies",
+        title: {
+          ca: "EMPRESES D' ALTA AL SECTOR TURÍSTIC / 2N TRIMESTRE 2020",
+        },
+      },
+      {
+        _id: "5fb6409e0ab2ff553d13ebd5",
+        section: "sos_unemployed",
+        title: {
+          ca:
+            "ATURATS DEL SECTOR TURÍSTIC DES DE FA MENYS D' UN ANY / SEGON TRIMESTRE 2020",
+        },
+      },
+      {
+        _id: "5fb6413a5d85e95533e27a99",
+        section: "sos_temporality",
+        title: {
+          ca:
+            "TAXA DE TEMPORALITAT DELS ASSALARIATS DEL SECTOR TURÍSTIC / SEGON TRIMESTRE 2020",
+        },
+      },
     ];
 
     let currentSectionIds = sectionIds.filter(
