@@ -403,16 +403,7 @@ const Dashboard = (props) => {
           <div style={{ padding: 20 }}>
             {props.data &&
               props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={[
-                    "*Sense interilles",
-                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
-                    "(..) Dada no disponible",
-                    "(…) Dada oculta per imprecisa/baixa qualitat.",
-                  ]}
-                ></DataTable>
+                <DataTable key={i} data={tableInput} footer={[]}></DataTable>
               ))}
           </div>
         );
@@ -424,12 +415,7 @@ const Dashboard = (props) => {
                 <DataTable
                   key={i}
                   data={tableInput}
-                  footer={[
-                    "*Sense interilles",
-                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
-                    "(..) Dada no disponible",
-                    "(…) Dada oculta per imprecisa/baixa qualitat.",
-                  ]}
+                  footer={["2019 Avançament, 2018 Provisionals"]}
                 ></DataTable>
               ))}
           </div>
@@ -439,16 +425,7 @@ const Dashboard = (props) => {
           <div style={{ padding: 20 }}>
             {props.data &&
               props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={[
-                    "*Sense interilles",
-                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
-                    "(..) Dada no disponible",
-                    "(…) Dada oculta per imprecisa/baixa qualitat.",
-                  ]}
-                ></DataTable>
+                <DataTable key={i} data={tableInput} footer={[]}></DataTable>
               ))}
           </div>
         );
@@ -457,16 +434,7 @@ const Dashboard = (props) => {
           <div style={{ padding: 20 }}>
             {props.data &&
               props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={[
-                    "*Sense interilles",
-                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
-                    "(..) Dada no disponible",
-                    "(…) Dada oculta per imprecisa/baixa qualitat.",
-                  ]}
-                ></DataTable>
+                <DataTable key={i} data={tableInput} footer={[]}></DataTable>
               ))}
           </div>
         );
@@ -478,12 +446,7 @@ const Dashboard = (props) => {
                 <DataTable
                   key={i}
                   data={tableInput}
-                  footer={[
-                    "*Sense interilles",
-                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
-                    "(..) Dada no disponible",
-                    "(…) Dada oculta per imprecisa/baixa qualitat.",
-                  ]}
+                  footer={["* Punts de variació"]}
                 ></DataTable>
               ))}
           </div>
@@ -493,16 +456,7 @@ const Dashboard = (props) => {
           <div style={{ padding: 20 }}>
             {props.data &&
               props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={[
-                    "*Sense interilles",
-                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
-                    "(..) Dada no disponible",
-                    "(…) Dada oculta per imprecisa/baixa qualitat.",
-                  ]}
-                ></DataTable>
+                <DataTable key={i} data={tableInput} footer={[]}></DataTable>
               ))}
           </div>
         );
