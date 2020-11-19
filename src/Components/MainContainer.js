@@ -175,6 +175,20 @@ function MainContainer() {
           ca: "PASSATGERS MARÍTIMS (ARRIBADES) / GENER-AGOST 2020 - Ports IB",
         },
       },
+      {
+        _id: "5fb5079a0ab2ff553d13ebd2",
+        section: "ens_energy_demand",
+        title: {
+          ca: "DEMANDA ENERGÈTICA /  ANY 2020",
+        },
+      },
+      {
+        _id: "5fb50c5f0ab2ff553d13ebd3",
+        section: "ens_human_pressure",
+        title: {
+          ca: "ÍNDEX PRESSIÓ HUMANA / JUNY 2020",
+        },
+      },
     ];
 
     let currentSectionIds = sectionIds.filter(
