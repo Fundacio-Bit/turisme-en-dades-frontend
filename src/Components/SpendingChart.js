@@ -87,7 +87,7 @@ const SpendingChart = (props) => {
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
-        data={props.data}
+        data={props.data.slice(0, -1)}
         cx="50%"
         cy="50%"
         innerRadius={60}
