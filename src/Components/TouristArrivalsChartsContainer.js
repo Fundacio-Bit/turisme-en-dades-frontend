@@ -13,6 +13,7 @@ const TouristArrivalsChartsContainer = (props) => {
           textAlign: "left",
           color: "#1DA57A",
           fontWeight: 500,
+          fontSize: 21,
           marginBottom: 20,
         }}
       >
@@ -21,7 +22,12 @@ const TouristArrivalsChartsContainer = (props) => {
       <Row style={{ textAlign: "center" }}>
         <Col span={8}>
           <div>
-            <h2 style={{ color: "#1DA57A" }}>Mallorca</h2>
+            <h2 style={{ color: "#1DA57A", marginBottom: 0, fontSize: 19 }}>
+              Mallorca
+            </h2>
+            <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
+              {Intl.NumberFormat("es").format(data.mallorca[6].value)} turistes
+            </h3>
             <ResponsiveContainer>
               <TouristArrivalsChart
                 data={data.mallorca}
@@ -32,7 +38,12 @@ const TouristArrivalsChartsContainer = (props) => {
         </Col>
         <Col span={8}>
           <div>
-            <h2 style={{ color: "#1DA57A" }}>Menorca</h2>
+            <h2 style={{ color: "#1DA57A", marginBottom: 0, fontSize: 19 }}>
+              Menorca
+            </h2>
+            <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
+              {Intl.NumberFormat("es").format(data.menorca[5].value)} turistes
+            </h3>
             <ResponsiveContainer>
               <TouristArrivalsChart
                 data={data.menorca}
@@ -43,7 +54,13 @@ const TouristArrivalsChartsContainer = (props) => {
         </Col>
         <Col span={8}>
           <div>
-            <h2 style={{ color: "#1DA57A" }}>Eivissa i Formentera</h2>
+            <h2 style={{ color: "#1DA57A", marginBottom: 0, fontSize: 19 }}>
+              Eivisa i Formentera
+            </h2>
+            <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
+              {Intl.NumberFormat("es").format(data.ibiza_formentera[5].value)}{" "}
+              turistes
+            </h3>
             <ResponsiveContainer>
               <TouristArrivalsChart
                 data={data.ibiza_formentera}

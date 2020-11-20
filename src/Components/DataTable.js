@@ -125,7 +125,15 @@ const AirPassengersTableCountries = (props) => {
   console.log("FORMATTED COLUMNS", columns.slice(0, 2));
   return (
     <div style={{ margin: "2%", marginTop: "20px" }}>
-      <h4 style={{ textAlign: "left", color: "#1DA57A", fontWeight: 500 }}>
+      <h4
+        style={{
+          textAlign: "left",
+          color: "#1DA57A",
+          fontWeight: 500,
+          fontSize: 21,
+          marginBottom: 20,
+        }}
+      >
         {props.data.title.ca}
       </h4>
 
