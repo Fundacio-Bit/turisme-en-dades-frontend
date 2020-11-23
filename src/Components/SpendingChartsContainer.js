@@ -1,9 +1,9 @@
 import React from "react";
-import TouristArrivalsChart from "./TouristArrivalsChart";
+import SpendingChart from "./SpendingChart";
 import { Row, Col } from "antd";
 import { ResponsiveContainer } from "recharts";
 
-const TouristArrivalsChartsContainer = (props) => {
+const SpendingChartsContainer = (props) => {
   const data = props.data;
   return (
     <div style={{ margin: "2%" }}>
@@ -23,48 +23,51 @@ const TouristArrivalsChartsContainer = (props) => {
         <Col span={8}>
           <div>
             <h2 style={{ color: "#1DA57A", marginBottom: 0, fontSize: 19 }}>
-              Mallorca
+              Despesa total (milions d'€)
             </h2>
             <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
-              {Intl.NumberFormat("es").format(data.mallorca[6].value)} turistes
+              {Intl.NumberFormat("es").format(data.total[9].value)} milions d'€
             </h3>
             <ResponsiveContainer>
-              <TouristArrivalsChart
-                data={data.mallorca}
-                title="Mallorca"
-              ></TouristArrivalsChart>
+              <SpendingChart
+                data={data.total}
+                title="Despesa total (milions d'€)"
+                units={data.units.total.ca}
+              ></SpendingChart>
             </ResponsiveContainer>
           </div>
         </Col>
         <Col span={8}>
           <div>
             <h2 style={{ color: "#1DA57A", marginBottom: 0, fontSize: 19 }}>
-              Menorca
+              Despesa per persona (€)
             </h2>
             <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
-              {Intl.NumberFormat("es").format(data.menorca[5].value)} turistes
+              {Intl.NumberFormat("es").format(data.person[9].value)} €
             </h3>
             <ResponsiveContainer>
-              <TouristArrivalsChart
-                data={data.menorca}
-                title="Menorca"
-              ></TouristArrivalsChart>
+              <SpendingChart
+                data={data.person}
+                title="Despesa per persona (€)"
+                units={data.units.person.ca}
+              ></SpendingChart>
             </ResponsiveContainer>
           </div>
         </Col>
         <Col span={8}>
           <div>
             <h2 style={{ color: "#1DA57A", marginBottom: 0, fontSize: 19 }}>
-              Eivisa i Formentera
+              Despesa per persona i dia (€)
             </h2>
             <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
-              {Intl.NumberFormat("es").format(data.ibiza_formentera[5].value)}{" "}
-              turistes
+              {Intl.NumberFormat("es").format(data.person_day[9].value)} €
             </h3>
             <ResponsiveContainer>
-              <TouristArrivalsChart
-                data={data.ibiza_formentera}
-              ></TouristArrivalsChart>
+              <SpendingChart
+                data={data.person_day}
+                title="Despesa per persona i dia (€)"
+                units={data.units.person_day.ca}
+              ></SpendingChart>
             </ResponsiveContainer>
           </div>
         </Col>
@@ -73,4 +76,4 @@ const TouristArrivalsChartsContainer = (props) => {
   );
 };
 
-export default TouristArrivalsChartsContainer;
+export default SpendingChartsContainer;

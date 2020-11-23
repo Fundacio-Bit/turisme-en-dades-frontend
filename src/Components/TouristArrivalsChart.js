@@ -60,7 +60,7 @@ const renderActiveShape = (props) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`${value} turistes`}</text>
+      >{`${Intl.NumberFormat("es").format(value)} turistes`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
@@ -82,11 +82,11 @@ const TouristArrivalsChart = (props) => {
   };
 
   return (
-    <PieChart width={500} height={250}>
+    <PieChart width={500} height={270}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
-        data={props.data}
+        data={props.data.slice(0, -1)}
         cx="50%"
         cy="50%"
         innerRadius={60}

@@ -15,6 +15,7 @@ const renderActiveShape = (props) => {
     payload,
     percent,
     value,
+    units,
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -60,7 +61,7 @@ const renderActiveShape = (props) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`${value} turistes`}</text>
+      >{`${Intl.NumberFormat("es").format(value)}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
@@ -68,7 +69,7 @@ const renderActiveShape = (props) => {
         textAnchor={textAnchor}
         fill="#999"
       >
-        {`(${(percent * 100).toFixed(2)}%)`}
+        {/* {`(${(percent * 100).toFixed(2)}%)`} */}
       </text>
     </g>
   );
@@ -86,7 +87,7 @@ const SpendingChart = (props) => {
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
-        data={props.data}
+        data={props.data.slice(0, -1)}
         cx="50%"
         cy="50%"
         innerRadius={60}

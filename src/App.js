@@ -1,11 +1,11 @@
 // import { Button } from "antd";
-import Dashboard from "./Components/Dashboard";
+import MainContainer from "./Components/MainContainer";
 
 import "./App.less";
 
 const App = () => (
   <div className="App">
-    <Dashboard></Dashboard>
+    <MainContainer></MainContainer>
   </div>
 );
 
