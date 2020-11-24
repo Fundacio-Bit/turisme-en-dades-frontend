@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PieChart, Pie, Sector } from "recharts";
+import { PieChart, Pie, Sector, Cell } from "recharts";
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -13,9 +13,7 @@ const renderActiveShape = (props) => {
     endAngle,
     fill,
     payload,
-    percent,
     value,
-    units,
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -68,9 +66,7 @@ const renderActiveShape = (props) => {
         dy={18}
         textAnchor={textAnchor}
         fill="#999"
-      >
-        {/* {`(${(percent * 100).toFixed(2)}%)`} */}
-      </text>
+      ></text>
     </g>
   );
 };
@@ -82,6 +78,19 @@ const SpendingChart = (props) => {
     setActiveIndex(index);
   };
 
+  let COLORS = [
+    "#7790d8",
+    "#586ba4",
+    "#324376",
+    "#E4D8B3",
+    "#f5dd90",
+    "#A88447",
+    "#f68e5f",
+    "#f76c5e",
+    "#CB4235",
+    "#A52D4F",
+  ];
+
   return (
     <PieChart width={500} height={250}>
       <Pie
@@ -91,11 +100,15 @@ const SpendingChart = (props) => {
         cx="50%"
         cy="50%"
         innerRadius={60}
-        outerRadius={80}
+        outerRadius={90}
         fill="#1DA57A"
         dataKey="value"
         onMouseEnter={onPieEnter}
-      />
+      >
+        {props.data.slice(0, -1).map((entry, index) => (
+          <Cell fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
     </PieChart>
   );
 };
