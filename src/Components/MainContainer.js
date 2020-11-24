@@ -281,7 +281,6 @@ function MainContainer() {
   }, [activeSection]);
 
   const handleMenuSelection = (e) => {
-    console.log("section", e.key);
     setLoading(true);
     setActiveSection(e.key);
   };

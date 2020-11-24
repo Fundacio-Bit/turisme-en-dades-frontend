@@ -121,8 +121,6 @@ const AirPassengersTableCountries = (props) => {
     );
   };
 
-  console.log("DATA COLUMNS", props.data.columns);
-  console.log("FORMATTED COLUMNS", columns.slice(0, 2));
   return (
     <div style={{ margin: "2%", marginTop: "20px" }}>
       <h4
