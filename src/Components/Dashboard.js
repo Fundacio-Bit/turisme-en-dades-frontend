@@ -14,7 +14,7 @@ const Dashboard = (props) => {
           return dataTable.chart_id === tableId;
         })[0];
       });
-      console.log("Table Input", tableInput);
+
       return data && tableInput[0] ? (
         <DataTable
           data={tableInput}
@@ -157,8 +157,8 @@ const Dashboard = (props) => {
           <div style={{ padding: 20 }}>
             {props.data &&
               getDataTable(props.data, [
-                "ecs_sea_occupancy_total",
-                "ecs_sea_occupancy_cumulative",
+                "ecs_occupancy_total",
+                "ecs_occupancy_cumulative",
               ])}
           </div>
         );
