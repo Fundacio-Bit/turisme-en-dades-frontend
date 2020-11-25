@@ -1,14 +1,21 @@
-import React from "react";
-import { Table } from "antd";
+import React, { useState } from "react";
+import { Table, Switch } from "antd";
 import {
   ArrowUpOutlined,
   ArrowDownOutlined,
   ArrowRightOutlined,
+  CloseOutlined,
+  CheckOutlined,
 } from "@ant-design/icons";
 
-const AirPassengersTableCountries = (props) => {
-  let columnsNr = props.data.columns.length;
-  const formattedRows = props.data.rows.map((row, i) => {
+const DataTable = (props) => {
+  const [showCumulative, setShowCumulative] = useState(props.cumulative);
+  console.log("Cumulative", showCumulative);
+  let selectedDataSet = showCumulative ? props.data[1] : props.data[0];
+  console.log("Cumulative", selectedDataSet);
+  console.log("Cumulative", props.data);
+  let columnsNr = selectedDataSet.columns.length;
+  const formattedRows = selectedDataSet.rows.map((row, i) => {
     return {
       key: i,
       rowName: row.name.ca,
@@ -28,21 +35,21 @@ const AirPassengersTableCountries = (props) => {
       return (
         <div>
           <span style={{ marginRight: 10 }}>{text}</span>
-          <ArrowUpOutlined style={{ color: "#38DCA8" }} />
+          <ArrowUpOutlined style={{ color: "#586ba4" }} />
         </div>
       );
     } else if (parseFloat(text) < 0) {
       return (
         <div>
           <span style={{ marginRight: 10 }}>{text}</span>
-          <ArrowDownOutlined style={{ color: "#12684D" }} />
+          <ArrowDownOutlined style={{ color: "#CB4235" }} />
         </div>
       );
     } else if (parseFloat(text) === 0) {
       return (
         <div>
           <span style={{ marginRight: 10 }}>{text}</span>
-          <ArrowRightOutlined style={{ color: "#1DA57A" }} />
+          <ArrowRightOutlined style={{ color: "#f68e5f" }} />
         </div>
       );
     } else {
@@ -61,45 +68,45 @@ const AirPassengersTableCountries = (props) => {
       key: "rowName",
     },
     {
-      title: columnsNr > 0 ? props.data.columns[0].ca : null,
+      title: columnsNr > 0 ? selectedDataSet.columns[0].ca : null,
       dataIndex: "total_balears",
       key: "total_balears",
     },
     {
-      title: columnsNr > 1 ? props.data.columns[1].ca : null,
+      title: columnsNr > 1 ? selectedDataSet.columns[1].ca : null,
       dataIndex: "variation_balears",
       key: "variation_balears",
       render: (text) => showArrows(text),
     },
     {
-      title: columnsNr > 2 ? props.data.columns[2].ca : null,
+      title: columnsNr > 2 ? selectedDataSet.columns[2].ca : null,
       dataIndex: "total_mallorca",
       key: "total_mallorca",
     },
     {
-      title: columnsNr > 3 ? props.data.columns[3].ca : null,
+      title: columnsNr > 3 ? selectedDataSet.columns[3].ca : null,
       dataIndex: "variation_mallorca",
       key: "variation_mallorca",
       render: (text) => showArrows(text),
     },
     {
-      title: columnsNr > 4 ? props.data.columns[4].ca : null,
+      title: columnsNr > 4 ? selectedDataSet.columns[4].ca : null,
       dataIndex: "total_menorca",
       key: "total_menorca",
     },
     {
-      title: columnsNr > 5 ? props.data.columns[5].ca : null,
+      title: columnsNr > 5 ? selectedDataSet.columns[5].ca : null,
       dataIndex: "variation_menorca",
       key: "variation_menorca",
       render: (text) => showArrows(text),
     },
     {
-      title: columnsNr > 6 ? props.data.columns[6].ca : null,
+      title: columnsNr > 6 ? selectedDataSet.columns[6].ca : null,
       dataIndex: "total_ib_for",
       key: "total_ib_for",
     },
     {
-      title: columnsNr > 7 ? props.data.columns[7].ca : null,
+      title: columnsNr > 7 ? selectedDataSet.columns[7].ca : null,
       dataIndex: "variation_ib_for",
       key: "variation_ib_for",
       render: (text) => showArrows(text),
@@ -123,17 +130,40 @@ const AirPassengersTableCountries = (props) => {
 
   return (
     <div style={{ margin: "2%", marginTop: "20px" }}>
-      <h4
-        style={{
-          textAlign: "left",
-          color: "#1DA57A",
-          fontWeight: 500,
-          fontSize: 21,
-          marginBottom: 20,
-        }}
-      >
-        {props.data.title.ca}
-      </h4>
+      <span>
+        <h4
+          style={{
+            textAlign: "left",
+            color: "#1DA57A",
+            fontWeight: 500,
+            fontSize: 21,
+            marginBottom: 20,
+          }}
+        >
+          <span style={{ marginRight: 30 }}> {selectedDataSet.title.ca}</span>
+          {props.data.length === 2 && (
+            <span>
+              <Switch
+                style={{ float: "right", marginRight: 50 }}
+                checkedChildren={
+                  <div>
+                    <CheckOutlined />
+                    <span style={{ marginLeft: 5 }}>Acumulat</span>
+                  </div>
+                }
+                unCheckedChildren={
+                  <div>
+                    <span style={{ marginRight: 5 }}>Acumulat</span>
+                    <CloseOutlined />
+                  </div>
+                }
+                onChange={() => setShowCumulative(!showCumulative)}
+                defaultUnchecked
+              />
+            </span>
+          )}
+        </h4>
+      </span>
 
       <Table
         dataSource={formattedRows}
@@ -145,4 +175,4 @@ const AirPassengersTableCountries = (props) => {
   );
 };
 
-export default AirPassengersTableCountries;
+export default DataTable;
