@@ -8,6 +8,26 @@ import SpendingChartsContainer from "./SpendingChartsContainer";
 
 const Dashboard = (props) => {
   const selectedView = (view) => {
+    const getDataTable = (data, tableIds) => {
+      const tableInput = tableIds.map((tableId) => {
+        return data.filter((dataTable) => {
+          return dataTable.chart_id === tableId;
+        })[0];
+      });
+      console.log("Table Input", tableInput);
+      return data && tableInput[0] ? (
+        <DataTable
+          data={tableInput}
+          footer={[
+            "*Sense interilles",
+            "**(Dinamarca, Finlàndia, Noruega i Suècia)",
+            "(..) Dada no disponible",
+            "(…) Dada oculta per imprecisa/baixa qualitat.",
+          ]}
+          cumulative={false}
+        ></DataTable>
+      ) : null;
+    };
     switch (view) {
       case "ecs_tourist_arrivals":
         const touristArrivalChartsData = {
@@ -38,6 +58,7 @@ const Dashboard = (props) => {
             { name: "Total", value: 228595 },
           ],
         };
+
         return (
           <div style={{ padding: 20 }}>
             {props.data && (
@@ -46,18 +67,10 @@ const Dashboard = (props) => {
               ></TouristArrivalsChartsContainer>
             )}
             {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={[
-                    "*Sense interilles",
-                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
-                    "(..) Dada no disponible",
-                    "(…) Dada oculta per imprecisa/baixa qualitat.",
-                  ]}
-                ></DataTable>
-              ))}
+              getDataTable(props.data, [
+                "ecs_tourist_arrivals_total",
+                "ecs_tourist_arrivals_cumulative",
+              ])}
           </div>
         );
       case "ecs_spending":
@@ -105,6 +118,7 @@ const Dashboard = (props) => {
             { name: "Total", value: 118.47 },
           ],
         };
+
         return (
           <div style={{ padding: 20 }}>
             {props.data && (
@@ -112,60 +126,40 @@ const Dashboard = (props) => {
                 data={spendingChartsData}
               ></SpendingChartsContainer>
             )}
+            {props.data &&
+              getDataTable(props.data, [
+                "ecs_spending_countries_total",
+                "ecs_spending_countries_cumulative",
+              ])}
 
             {props.data &&
-              props.data
-                .slice(0, 2)
-                .map((tableInput, i) => (
-                  <DataTable
-                    key={i}
-                    data={tableInput}
-                    footer={[
-                      "**(Dinamarca, Finlàndia, Noruega i Suècia)",
-                      "(..) Dada no disponible",
-                      "(…) Dada oculta per imprecisa/baixa qualitat.",
-                    ]}
-                  ></DataTable>
-                ))}
+              getDataTable(props.data, [
+                "ecs_spending_islands_total",
+                "ecs_spending_islands_cumulative",
+              ])}
 
             {props.data &&
-              props.data
-                .slice(2, 4)
-                .map((tableInput, i) => (
-                  <DataTable
-                    key={i}
-                    data={tableInput}
-                    footer={[
-                      "(..) Dada no disponible",
-                      "(…) Dada oculta per imprecisa/baixa qualitat.",
-                    ]}
-                  ></DataTable>
-                ))}
+              getDataTable(props.data, [
+                "ecs_spending_stays_countries_total",
+                "ecs_spending_stays_countries_cumulative",
+              ])}
+
             {props.data &&
-              props.data
-                .slice(4)
-                .map((tableInput, i) => (
-                  <DataTable key={i} data={tableInput} footer={[]}></DataTable>
-                ))}
+              getDataTable(props.data, [
+                "ecs_spending_stays_islands_total",
+                "ecs_spending_stays_islands_cumulative",
+              ])}
           </div>
         );
-
-      // return <SpendingTable></SpendingTable>;
 
       case "ecs_occupancy":
         return (
           <div style={{ padding: 20 }}>
             {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={[
-                    "(..) Dada no disponible",
-                    "(…) Dada oculta per imprecisa/baixa qualitat.",
-                  ]}
-                ></DataTable>
-              ))}
+              getDataTable(props.data, [
+                "ecs_sea_occupancy_total",
+                "ecs_sea_occupancy_cumulative",
+              ])}
           </div>
         );
 
@@ -173,17 +167,10 @@ const Dashboard = (props) => {
         return (
           <div style={{ padding: 20 }}>
             {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={[
-                    "*Sense interilles",
-                    "**(Dinamarca, Finlàndia, Noruega i Suècia)",
-                    "(..) Dada no disponible",
-                  ]}
-                ></DataTable>
-              ))}
+              getDataTable(props.data, [
+                "ecs_air_passengers_arrivals_total",
+                "ecs_air_passengers_arrivals_cumulative",
+              ])}
           </div>
         );
 
@@ -191,76 +178,64 @@ const Dashboard = (props) => {
         return (
           <div style={{ padding: 20 }}>
             {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={["(..) Dada no disponible"]}
-                ></DataTable>
-              ))}
+              getDataTable(props.data, [
+                "ecs_sea_passengers_arrivals_cruises_ap_total",
+                "ecs_sea_passengers_arrivals_cruises_ap_cumulative",
+              ])}
+            {props.data &&
+              getDataTable(props.data, [
+                "ecs_sea_passengers_arrivals_cruises_pib_total",
+                "ecs_sea_passengers_arrivals_cruises_pib_cumulative",
+              ])}
+
+            {props.data &&
+              getDataTable(props.data, [
+                "ecs_sea_passengers_arrivals_regular_ap_total",
+                "ecs_sea_passengers_arrivals_regular_ap_cumulative",
+              ])}
+            {props.data &&
+              getDataTable(props.data, [
+                "ecs_sea_passengers_arrivals_regular_pib_total",
+                "ecs_sea_passengers_arrivals_regular_pib_cumulative",
+              ])}
           </div>
         );
 
       case "ens_energy_demand":
         return (
           <div style={{ padding: 20 }}>
-            {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable key={i} data={tableInput} footer={[]}></DataTable>
-              ))}
+            {props.data && getDataTable(props.data, ["ens_energy_total"])}
           </div>
         );
       case "ens_human_pressure":
         return (
           <div style={{ padding: 20 }}>
             {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={["2019 Avançament, 2018 Provisionals"]}
-                ></DataTable>
-              ))}
+              getDataTable(props.data, ["ens_human_pressure_total"])}
           </div>
         );
       case "sos_affiliates":
         return (
           <div style={{ padding: 20 }}>
-            {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable key={i} data={tableInput} footer={[]}></DataTable>
-              ))}
+            {props.data && getDataTable(props.data, ["sos_affiliates"])}
           </div>
         );
       case "sos_unemployed":
         return (
           <div style={{ padding: 20 }}>
-            {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable key={i} data={tableInput} footer={[]}></DataTable>
-              ))}
+            {props.data && getDataTable(props.data, ["sos_unemployed"])}
           </div>
         );
       case "sos_temporality":
         return (
           <div style={{ padding: 20 }}>
-            {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable
-                  key={i}
-                  data={tableInput}
-                  footer={["* Punts de variació"]}
-                ></DataTable>
-              ))}
+            {props.data && getDataTable(props.data, ["sos_temporality"])}
           </div>
         );
       case "sos_companies":
         return (
           <div style={{ padding: 20 }}>
-            {props.data &&
-              props.data.map((tableInput, i) => (
-                <DataTable key={i} data={tableInput} footer={[]}></DataTable>
-              ))}
+            {props.data && getDataTable(props.data, ["sos_companies"])}
           </div>
         );
 
