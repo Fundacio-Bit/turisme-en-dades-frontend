@@ -10,10 +10,7 @@ import {
 
 const DataTable = (props) => {
   const [showCumulative, setShowCumulative] = useState(props.cumulative);
-  console.log("Cumulative", showCumulative);
   let selectedDataSet = showCumulative ? props.data[1] : props.data[0];
-  console.log("Cumulative", selectedDataSet);
-  console.log("Cumulative", props.data);
   let columnsNr = selectedDataSet.columns.length;
   const formattedRows = selectedDataSet.rows.map((row, i) => {
     return {
