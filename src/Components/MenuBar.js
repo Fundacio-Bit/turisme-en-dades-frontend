@@ -1,5 +1,6 @@
 import React from "react";
-import { Menu } from "antd";
+import moment from "moment";
+import { Menu, DatePicker } from "antd";
 import {
   BankTwoTone,
   ShopTwoTone,
@@ -9,6 +10,7 @@ import {
 const { SubMenu } = Menu;
 
 const MenuBar = (props) => {
+  const monthFormat = "YYYY-MM";
   return (
     <Menu
       onClick={props.handleMenuSelection}
@@ -56,6 +58,21 @@ const MenuBar = (props) => {
           Empreses d'alta al sector turístic
         </Menu.Item>
       </SubMenu>
+      <span style={{ marginRight: 100, float: "right" }}>
+        <span style={{ marginRight: 10 }}>MES</span>
+        <span>
+          <DatePicker
+            defaultValue={moment(
+              `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
+              monthFormat
+            )}
+            placeholder="Seleccioni mes"
+            format={monthFormat}
+            picker="month"
+            onChange={props.handleMonthSelection}
+          />
+        </span>
+      </span>
     </Menu>
   );
 };
