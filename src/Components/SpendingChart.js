@@ -92,7 +92,7 @@ const SpendingChart = (props) => {
   ];
 
   return (
-    <PieChart width={500} height={250}>
+    <PieChart width={500} height={300}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
