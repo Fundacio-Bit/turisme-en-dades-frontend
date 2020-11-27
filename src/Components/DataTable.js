@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 
 const DataTable = (props) => {
-  const [showCumulative, setShowCumulative] = useState(props.cumulative);
+  const [showCumulative, setShowCumulative] = useState(false);
   let selectedDataSet = showCumulative ? props.data[1] : props.data[0];
   let columnsNr = selectedDataSet.columns.length;
   const formattedRows = selectedDataSet.rows.map((row, i) => {
@@ -28,21 +28,21 @@ const DataTable = (props) => {
   });
 
   const showArrows = (text) => {
-    if (parseFloat(text) > 0) {
+    if (parseFloat(text.replace(".", "").replace(",", ".")) > 0) {
       return (
         <div>
           <span style={{ marginRight: 10 }}>{text}</span>
           <ArrowUpOutlined style={{ color: "#586ba4" }} />
         </div>
       );
-    } else if (parseFloat(text) < 0) {
+    } else if (parseFloat(text.replace(".", "").replace(",", ".")) < 0) {
       return (
         <div>
           <span style={{ marginRight: 10 }}>{text}</span>
           <ArrowDownOutlined style={{ color: "#CB4235" }} />
         </div>
       );
-    } else if (parseFloat(text) === 0) {
+    } else if (parseFloat(text.replace(".", "").replace(",", ".")) === 0) {
       return (
         <div>
           <span style={{ marginRight: 10 }}>{text}</span>
@@ -119,7 +119,7 @@ const DataTable = (props) => {
         }}
       >
         {footerArray.map((text) => {
-          return <span>{text}</span>;
+          return <span>{text.ca}</span>;
         })}
       </div>
     );
@@ -166,7 +166,7 @@ const DataTable = (props) => {
         dataSource={formattedRows}
         columns={columns.slice(0, columnsNr + 1)}
         pagination={false}
-        footer={() => footer(props.footer)}
+        footer={() => footer(selectedDataSet.footer)}
       />
     </div>
   );

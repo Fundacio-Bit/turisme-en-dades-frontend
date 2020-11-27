@@ -26,13 +26,15 @@ const SpendingChartsContainer = (props) => {
               Despesa total (milions d'€)
             </h2>
             <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
-              {Intl.NumberFormat("es").format(data.total[9].value)} milions d'€
+              {Intl.NumberFormat("es").format(
+                data.total[data.total.length - 1].value
+              )}{" "}
+              milions d'€
             </h3>
             <ResponsiveContainer>
               <SpendingChart
                 data={data.total}
                 title="Despesa total (milions d'€)"
-                units={data.units.total.ca}
               ></SpendingChart>
             </ResponsiveContainer>
           </div>
@@ -43,13 +45,15 @@ const SpendingChartsContainer = (props) => {
               Despesa per persona (€)
             </h2>
             <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
-              {Intl.NumberFormat("es").format(data.person[9].value)} €
+              {Intl.NumberFormat("es").format(
+                data.person[data.person.length - 1].value
+              )}{" "}
+              €
             </h3>
             <ResponsiveContainer>
               <SpendingChart
                 data={data.person}
                 title="Despesa per persona (€)"
-                units={data.units.person.ca}
               ></SpendingChart>
             </ResponsiveContainer>
           </div>
@@ -60,13 +64,15 @@ const SpendingChartsContainer = (props) => {
               Despesa per persona i dia (€)
             </h2>
             <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
-              {Intl.NumberFormat("es").format(data.person_day[9].value)} €
+              {Intl.NumberFormat("es").format(
+                data.person_day[data.person_day.length - 1].value
+              )}{" "}
+              €
             </h3>
             <ResponsiveContainer>
               <SpendingChart
                 data={data.person_day}
                 title="Despesa per persona i dia (€)"
-                units={data.units.person_day.ca}
               ></SpendingChart>
             </ResponsiveContainer>
           </div>
