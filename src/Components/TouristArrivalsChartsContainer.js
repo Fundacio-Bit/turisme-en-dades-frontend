@@ -26,7 +26,10 @@ const TouristArrivalsChartsContainer = (props) => {
               Mallorca
             </h2>
             <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
-              {Intl.NumberFormat("es").format(data.mallorca[6].value)} turistes
+              {Intl.NumberFormat("es").format(
+                data.mallorca[data.mallorca.length - 1].value
+              )}{" "}
+              turistes
             </h3>
             <ResponsiveContainer>
               <TouristArrivalsChart
@@ -42,7 +45,10 @@ const TouristArrivalsChartsContainer = (props) => {
               Menorca
             </h2>
             <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
-              {Intl.NumberFormat("es").format(data.menorca[5].value)} turistes
+              {Intl.NumberFormat("es").format(
+                data.menorca[data.menorca.length - 1].value
+              )}{" "}
+              turistes
             </h3>
             <ResponsiveContainer>
               <TouristArrivalsChart
@@ -58,7 +64,9 @@ const TouristArrivalsChartsContainer = (props) => {
               Eivisa i Formentera
             </h2>
             <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
-              {Intl.NumberFormat("es").format(data.ibiza_formentera[5].value)}{" "}
+              {Intl.NumberFormat("es").format(
+                data.ibiza_formentera[data.ibiza_formentera.length - 1].value
+              )}{" "}
               turistes
             </h3>
             <ResponsiveContainer>
