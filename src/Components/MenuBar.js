@@ -1,5 +1,6 @@
 import React from "react";
-import moment from "moment";
+import Moment from "moment";
+import { extendMoment } from 'moment-range';
 import { Menu, DatePicker } from "antd";
 import {
   BankTwoTone,
@@ -9,6 +10,19 @@ import {
 
 const { SubMenu } = Menu;
 
+const moment = extendMoment(Moment);
+
+function disabledDate(current) {
+  const validMonths = ['2000-12','2020-08']
+  validMonths.forEach(month => {
+    var startDate = moment(month, "YYYY-MM").startOf('month').format('YYYY-MM-DD');
+    var endDate = moment(month, "YYYY-MM").endOf('month').format('YYYY-MM-DD');
+    var range = moment.range(startDate, endDate);
+    return current && !range.contains(current)
+  })
+}
+
+// TODO: añadir selector para acumulados
 const MenuBar = (props) => {
   const monthFormat = "YYYY-MM";
   return (
@@ -66,6 +80,8 @@ const MenuBar = (props) => {
               `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
               monthFormat
             )}
+            // defaultValue={props.activeMonth}
+            disabledDate={disabledDate}
             placeholder="Seleccioni mes"
             format={monthFormat}
             picker="month"
