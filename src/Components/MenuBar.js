@@ -24,7 +24,7 @@ const MenuBar = (props) => {
     >
       <SubMenu
         key="economic_sustainability"
-        icon={<BankTwoTone twoToneColor="#1DA57A" />}
+        icon={<BankTwoTone twoToneColor="#586BA4" />}
         title="SOSTENIBILITAT ECONÒMICA"
       >
         <Menu.Item key="ecs_tourist_arrivals">Arribada de turistes</Menu.Item>
@@ -40,7 +40,7 @@ const MenuBar = (props) => {
 
       <SubMenu
         key="Environmental sustainability"
-        icon={<EnvironmentTwoTone twoToneColor="#1DA57A" />}
+        icon={<EnvironmentTwoTone twoToneColor="#586BA4" />}
         title="SOSTENIBILITAT AMBIENTAL"
       >
         <Menu.Item key="ens_energy_demand">Demanda energètica</Menu.Item>
@@ -49,7 +49,7 @@ const MenuBar = (props) => {
 
       <SubMenu
         key="social_sustainability"
-        icon={<ShopTwoTone twoToneColor="#1DA57A" />}
+        icon={<ShopTwoTone twoToneColor="#586BA4" />}
         title="SOSTENIBILITAT SOCIAL"
       >
         <Menu.Item key="sos_affiliates">Afiliats del sector turístic</Menu.Item>

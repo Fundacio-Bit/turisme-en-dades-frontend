@@ -11,7 +11,7 @@ const TouristArrivalsChartsContainer = (props) => {
       <h4
         style={{
           textAlign: "left",
-          color: "#1DA57A",
+          color: "#586BA4",
           fontWeight: 500,
           fontSize: 21,
           marginBottom: 20,
@@ -22,10 +22,10 @@ const TouristArrivalsChartsContainer = (props) => {
       <Row style={{ textAlign: "center" }}>
         <Col span={8}>
           <div>
-            <h2 style={{ color: "#1DA57A", marginBottom: 0, fontSize: 19 }}>
+            <h2 style={{ color: "#586BA4", marginBottom: 0, fontSize: 19 }}>
               Mallorca
             </h2>
-            <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
+            <h3 style={{ color: "#586BA4", fontWeight: 400, fontSize: 14 }}>
               {Intl.NumberFormat("es").format(
                 data.mallorca[data.mallorca.length - 1].value
               )}{" "}
@@ -41,10 +41,10 @@ const TouristArrivalsChartsContainer = (props) => {
         </Col>
         <Col span={8}>
           <div>
-            <h2 style={{ color: "#1DA57A", marginBottom: 0, fontSize: 19 }}>
+            <h2 style={{ color: "#586BA4", marginBottom: 0, fontSize: 19 }}>
               Menorca
             </h2>
-            <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
+            <h3 style={{ color: "#586BA4", fontWeight: 400, fontSize: 14 }}>
               {Intl.NumberFormat("es").format(
                 data.menorca[data.menorca.length - 1].value
               )}{" "}
@@ -60,10 +60,10 @@ const TouristArrivalsChartsContainer = (props) => {
         </Col>
         <Col span={8}>
           <div>
-            <h2 style={{ color: "#1DA57A", marginBottom: 0, fontSize: 19 }}>
+            <h2 style={{ color: "#586BA4", marginBottom: 0, fontSize: 19 }}>
               Eivisa i Formentera
             </h2>
-            <h3 style={{ color: "#1DA57A", fontWeight: 400, fontSize: 14 }}>
+            <h3 style={{ color: "#586BA4", fontWeight: 400, fontSize: 14 }}>
               {Intl.NumberFormat("es").format(
                 data.ibiza_formentera[data.ibiza_formentera.length - 1].value
               )}{" "}
