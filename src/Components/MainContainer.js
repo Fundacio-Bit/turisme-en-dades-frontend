@@ -13,8 +13,7 @@ function MainContainer() {
   const [activeSection, setActiveSection] = useState("ecs_tourist_arrivals");
   //TODO: quitar uno al mes
   const [activeMonth, setActiveMonth] = useState(
-    // validMonths.slice(-1)[0]
-    `${new Date().getFullYear()}-${new Date().getMonth() + 1}`
+    validMonths.slice(-1)[0]
   );
 
   const [loading, setLoading] = useState(true);
@@ -65,9 +64,8 @@ function MainContainer() {
     setActiveSection(e.key);
   };
 
-  const handleMonthSelection = (e) => {
-    console.log(e.format("YYYY-MM"));
-    setActiveMonth(e.format("YYYY-MM"));
+  const handleMonthSelection = (month) => {
+    setActiveMonth(month);
   };
 
   return (
@@ -75,8 +73,8 @@ function MainContainer() {
       <MenuBar
         handleMenuSelection={handleMenuSelection}
         handleMonthSelection={handleMonthSelection}
-        // validMonths={validMonths}
-        // activeMonth={activeMonth}
+        validMonths={validMonths}
+        activeMonth={activeMonth}
         activeSection={activeSection}
       ></MenuBar>
       {loading ? (

@@ -1,7 +1,7 @@
 import React from "react";
-import Moment from "moment";
-import { extendMoment } from 'moment-range';
-import { Menu, DatePicker } from "antd";
+import { Menu } from "antd";
+import { Select } from 'antd';
+
 import {
   BankTwoTone,
   ShopTwoTone,
@@ -9,23 +9,14 @@ import {
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
+const { Option } = Select;
 
-const moment = extendMoment(Moment);
-
-function disabledDate(current) {
-  const validMonths = ['2000-12','2020-08']
-  validMonths.forEach(month => {
-    var startDate = moment(month, "YYYY-MM").startOf('month').format('YYYY-MM-DD');
-    var endDate = moment(month, "YYYY-MM").endOf('month').format('YYYY-MM-DD');
-    var range = moment.range(startDate, endDate);
-    return current && !range.contains(current)
-  })
-}
 
 // TODO: añadir selector para acumulados
 const MenuBar = (props) => {
-  const monthFormat = "YYYY-MM";
-  return (
+    const monthFormat = "YYYY-MM";
+
+    return (
     <Menu
       onClick={props.handleMenuSelection}
       selectedKeys={[props.activeSection]}
@@ -75,18 +66,21 @@ const MenuBar = (props) => {
       <span style={{ marginRight: 100, float: "right" }}>
         <span style={{ marginRight: 10 }}>MES</span>
         <span>
-          <DatePicker
+          <Select defaultValue={props.activeMonth} style={{ width: 120 }} onChange={props.handleMonthSelection}>
+            {props.validMonths.map( (month) => (<Option value={month} >{month}</Option>))}
+          </Select>
+          {/* <DatePicker
             defaultValue={moment(
               `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
               monthFormat
             )}
             // defaultValue={props.activeMonth}
-            disabledDate={disabledDate}
+            // disabledDate={disabledDate}
             placeholder="Seleccioni mes"
             format={monthFormat}
             picker="month"
             onChange={props.handleMonthSelection}
-          />
+          /> */}
         </span>
       </span>
     </Menu>
