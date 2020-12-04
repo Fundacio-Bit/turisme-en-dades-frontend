@@ -131,7 +131,7 @@ const DataTable = (props) => {
         <h4
           style={{
             textAlign: "left",
-            color: "#1DA57A",
+            color: "#586BA4",
             fontWeight: 500,
             fontSize: 21,
             marginBottom: 20,

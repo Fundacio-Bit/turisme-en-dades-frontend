@@ -104,7 +104,7 @@ const TouristArrivalsChart = (props) => {
         cy="50%"
         innerRadius={60}
         outerRadius={90}
-        fill="#1DA57A"
+        fill="#586BA4"
         dataKey="value"
         onMouseEnter={onPieEnter}
       >
