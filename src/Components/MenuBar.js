@@ -14,7 +14,6 @@ const { Option } = Select;
 
 // TODO: añadir selector para acumulados
 const MenuBar = (props) => {
-    const monthFormat = "YYYY-MM";
 
     return (
     <Menu
@@ -64,23 +63,11 @@ const MenuBar = (props) => {
         </Menu.Item>
       </SubMenu>
       <span style={{ marginRight: 100, float: "right" }}>
-        <span style={{ marginRight: 10 }}>MES</span>
+        <span style={{ marginRight: 10, fontWeight: "bold" }}>MES</span>
         <span>
-          <Select defaultValue={props.activeMonth} style={{ width: 120 }} onChange={props.handleMonthSelection}>
+          <Select defaultValue={props.activeMonth} style={{ width: 120, fontWeight: "bold", borderWidth: 10 }} onChange={props.handleMonthSelection}>
             {props.validMonths.map( (month) => (<Option value={month} >{month}</Option>))}
           </Select>
-          {/* <DatePicker
-            defaultValue={moment(
-              `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
-              monthFormat
-            )}
-            // defaultValue={props.activeMonth}
-            // disabledDate={disabledDate}
-            placeholder="Seleccioni mes"
-            format={monthFormat}
-            picker="month"
-            onChange={props.handleMonthSelection}
-          /> */}
         </span>
       </span>
     </Menu>
