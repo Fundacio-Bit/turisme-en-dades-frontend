@@ -1,6 +1,7 @@
 import React from "react";
-import moment from "moment";
-import { Menu, DatePicker } from "antd";
+import { Menu } from "antd";
+import { Select } from 'antd';
+
 import {
   BankTwoTone,
   ShopTwoTone,
@@ -8,10 +9,14 @@ import {
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
+const { Option } = Select;
 
+
+// TODO: añadir selector para acumulados
 const MenuBar = (props) => {
-  const monthFormat = "YYYY-MM";
-  return (
+    const monthFormat = "YYYY-MM";
+
+    return (
     <Menu
       onClick={props.handleMenuSelection}
       selectedKeys={[props.activeSection]}
@@ -19,7 +24,7 @@ const MenuBar = (props) => {
     >
       <SubMenu
         key="economic_sustainability"
-        icon={<BankTwoTone twoToneColor="#1DA57A" />}
+        icon={<BankTwoTone twoToneColor="#586BA4" />}
         title="SOSTENIBILITAT ECONÒMICA"
       >
         <Menu.Item key="ecs_tourist_arrivals">Arribada de turistes</Menu.Item>
@@ -35,7 +40,7 @@ const MenuBar = (props) => {
 
       <SubMenu
         key="Environmental sustainability"
-        icon={<EnvironmentTwoTone twoToneColor="#1DA57A" />}
+        icon={<EnvironmentTwoTone twoToneColor="#586BA4" />}
         title="SOSTENIBILITAT AMBIENTAL"
       >
         <Menu.Item key="ens_energy_demand">Demanda energètica</Menu.Item>
@@ -44,7 +49,7 @@ const MenuBar = (props) => {
 
       <SubMenu
         key="social_sustainability"
-        icon={<ShopTwoTone twoToneColor="#1DA57A" />}
+        icon={<ShopTwoTone twoToneColor="#586BA4" />}
         title="SOSTENIBILITAT SOCIAL"
       >
         <Menu.Item key="sos_affiliates">Afiliats del sector turístic</Menu.Item>
@@ -61,16 +66,21 @@ const MenuBar = (props) => {
       <span style={{ marginRight: 100, float: "right" }}>
         <span style={{ marginRight: 10 }}>MES</span>
         <span>
-          <DatePicker
+          <Select defaultValue={props.activeMonth} style={{ width: 120 }} onChange={props.handleMonthSelection}>
+            {props.validMonths.map( (month) => (<Option value={month} >{month}</Option>))}
+          </Select>
+          {/* <DatePicker
             defaultValue={moment(
               `${new Date().getFullYear()}-${new Date().getMonth() + 1}`,
               monthFormat
             )}
+            // defaultValue={props.activeMonth}
+            // disabledDate={disabledDate}
             placeholder="Seleccioni mes"
             format={monthFormat}
             picker="month"
             onChange={props.handleMonthSelection}
-          />
+          /> */}
         </span>
       </span>
     </Menu>

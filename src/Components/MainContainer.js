@@ -5,20 +5,27 @@ import Dashboard from "./Dashboard";
 import { Spin, Space, message } from "antd";
 import axios from "axios";
 
+//TODO: Call API Rest to get months with data
+const validMonths = ['2000-12', '2020-08']
+
+
 function MainContainer() {
   const [activeSection, setActiveSection] = useState("ecs_tourist_arrivals");
+  //TODO: quitar uno al mes
   const [activeMonth, setActiveMonth] = useState(
-    `${new Date().getFullYear()}-${new Date().getMonth() + 1}`
+    validMonths.slice(-1)[0]
   );
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
+  // TODO: añadir state cumulative
 
   useEffect(() => {
     const noDataWarning = () => {
       message.info({
         content: `No tenim dades del mes ${activeMonth}`,
         className: "custom-class",
+        // TODO: disminuir duracion
         duration: 10,
         style: {
           marginTop: 75,
@@ -57,9 +64,8 @@ function MainContainer() {
     setActiveSection(e.key);
   };
 
-  const handleMonthSelection = (e) => {
-    console.log(e.format("YYYY-MM"));
-    setActiveMonth(e.format("YYYY-MM"));
+  const handleMonthSelection = (month) => {
+    setActiveMonth(month);
   };
 
   return (
@@ -67,6 +73,8 @@ function MainContainer() {
       <MenuBar
         handleMenuSelection={handleMenuSelection}
         handleMonthSelection={handleMonthSelection}
+        validMonths={validMonths}
+        activeMonth={activeMonth}
         activeSection={activeSection}
       ></MenuBar>
       {loading ? (
