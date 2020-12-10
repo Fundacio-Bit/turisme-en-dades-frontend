@@ -16,10 +16,10 @@ const Dashboard = (props) => {
 
     switch (view) {
       case "ecs_tourist_arrivals":
-        const chartDataRaw = getTableDataByChartId(
-          props.data,
-          "ecs_tourist_arrivals_total"
-        );
+        var chartDataRaw = null;
+        props.showCumulative?
+        chartDataRaw = getTableDataByChartId( props.data, "ecs_tourist_arrivals_cumulative" )
+        : chartDataRaw = getTableDataByChartId( props.data, "ecs_tourist_arrivals_total" )
 
         const touristArrivalChartsData = () => {
           if (chartDataRaw) {
@@ -67,6 +67,7 @@ const Dashboard = (props) => {
                 "ecs_tourist_arrivals_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -82,10 +83,11 @@ const Dashboard = (props) => {
           </div>
         );
       case "ecs_spending":
-        const spendingChartDataRaw = getTableDataByChartId(
-          props.data,
-          "ecs_spending_countries_total"
-        );
+        var spendingChartDataRaw = null;
+        props.showCumulative?
+          spendingChartDataRaw = getTableDataByChartId( props.data, "ecs_spending_countries_total" )
+          : spendingChartDataRaw = getTableDataByChartId( props.data, "ecs_spending_countries_cumulative" )
+
 
         const spendingChartsData = () => {
           if (spendingChartDataRaw) {
@@ -148,6 +150,7 @@ const Dashboard = (props) => {
                 "ecs_spending_countries_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -168,6 +171,7 @@ const Dashboard = (props) => {
                 "ecs_spending_islands_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -191,6 +195,7 @@ const Dashboard = (props) => {
                 "ecs_spending_stays_countries_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -214,6 +219,7 @@ const Dashboard = (props) => {
                 "ecs_spending_stays_islands_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -236,6 +242,7 @@ const Dashboard = (props) => {
               getTableDataByChartId(props.data, "ecs_occupancy_total") &&
               getTableDataByChartId(props.data, "ecs_occupancy_cumulative") && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(props.data, "ecs_occupancy_total"),
                     getTableDataByChartId(
@@ -261,6 +268,7 @@ const Dashboard = (props) => {
                 "ecs_air_passengers_arrivals_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -289,6 +297,7 @@ const Dashboard = (props) => {
                 "ecs_sea_passengers_arrivals_cruises_ap_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -312,6 +321,7 @@ const Dashboard = (props) => {
                 "ecs_sea_passengers_arrivals_cruises_pib_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -335,6 +345,7 @@ const Dashboard = (props) => {
                 "ecs_sea_passengers_arrivals_regular_ap_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -358,6 +369,7 @@ const Dashboard = (props) => {
                 "ecs_sea_passengers_arrivals_regular_pib_cumulative"
               ) && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -379,6 +391,7 @@ const Dashboard = (props) => {
             {props.data &&
               getTableDataByChartId(props.data, "ens_energy_total") && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[getTableDataByChartId(props.data, "ens_energy_total")]}
                 ></DataTable>
               )}
@@ -390,6 +403,7 @@ const Dashboard = (props) => {
             {props.data &&
               getTableDataByChartId(props.data, "ens_human_pressure_total") && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(
                       props.data,
@@ -406,6 +420,7 @@ const Dashboard = (props) => {
             {props.data &&
               getTableDataByChartId(props.data, "sos_affiliates") && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[getTableDataByChartId(props.data, "sos_affiliates")]}
                 ></DataTable>
               )}
@@ -417,6 +432,7 @@ const Dashboard = (props) => {
             {props.data &&
               getTableDataByChartId(props.data, "sos_unemployed") && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[getTableDataByChartId(props.data, "sos_unemployed")]}
                 ></DataTable>
               )}
@@ -428,6 +444,7 @@ const Dashboard = (props) => {
             {props.data &&
               getTableDataByChartId(props.data, "sos_temporality") && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[getTableDataByChartId(props.data, "sos_temporality")]}
                 ></DataTable>
               )}
@@ -439,6 +456,7 @@ const Dashboard = (props) => {
             {props.data &&
               getTableDataByChartId(props.data, "sos_companies") && (
                 <DataTable
+                  showCumulative={props.showCumulative}
                   data={[getTableDataByChartId(props.data, "sos_companies")]}
                 ></DataTable>
               )}
