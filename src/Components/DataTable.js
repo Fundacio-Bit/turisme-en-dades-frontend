@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { Table, Switch } from "antd";
+import React from "react";
+import { Table } from "antd";
 import {
   ArrowUpOutlined,
   ArrowDownOutlined,
   ArrowRightOutlined,
-  // CloseOutlined,
-  // CheckOutlined,
 } from "@ant-design/icons";
 
 const DataTable = (props) => {

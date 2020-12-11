@@ -67,7 +67,7 @@ const MenuBar = (props) => {
         <div style={{ margin: 5, fontWeight: "bold" }}>
           <div style={{ float: "left", marginRight: 5 }}>MES</div>
           <div style={{ float: "left" }}>
-            <Select defaultValue={props.activeMonth} 
+            <Select value={props.activeMonth} 
               style={{ width: 120, fontWeight: "bold", borderWidth: 10 }} 
               onChange={props.handleMonthSelection}>
               {props.validMonths.map( (month) => (<Option value={month} >{month}</Option>))}
