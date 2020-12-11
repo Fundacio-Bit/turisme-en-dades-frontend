@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { Table, Switch } from "antd";
+import React from "react";
+import { Table } from "antd";
 import {
   ArrowUpOutlined,
   ArrowDownOutlined,
   ArrowRightOutlined,
-  CloseOutlined,
-  CheckOutlined,
 } from "@ant-design/icons";
 
 const DataTable = (props) => {
-  const [showCumulative, setShowCumulative] = useState(false);
-  let selectedDataSet = showCumulative ? props.data[1] : props.data[0];
+  let selectedDataSet = props.data.length === 2 && props.showCumulative ? props.data[1] : props.data[0];
   let columnsNr = selectedDataSet.columns.length;
   const formattedRows = selectedDataSet.rows.map((row, i) => {
     return {
@@ -138,7 +135,7 @@ const DataTable = (props) => {
           }}
         >
           <span style={{ marginRight: 30 }}> {selectedDataSet.title.ca}</span>
-          {props.data.length === 2 && (
+          {/* {props.data.length === 2 && (
             <span>
               <Switch
                 style={{ float: "right", marginRight: 50 }}
@@ -158,7 +155,7 @@ const DataTable = (props) => {
                 defaultUnchecked
               />
             </span>
-          )}
+          )} */}
         </h4>
       </span>
 

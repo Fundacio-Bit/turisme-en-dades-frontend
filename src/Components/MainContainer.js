@@ -5,20 +5,41 @@ import Dashboard from "./Dashboard";
 import { Spin, Space, message } from "antd";
 import axios from "axios";
 
-//TODO: Call API Rest to get months with data
-const validMonths = ['2000-12', '2020-08']
 
+const validMonths=['2020-08', '2020-10']
+
+// PUBLIC API TOKEN (does not expire. Cannot perform actions other than reading)
+const apiToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyb250ZW5kIiwiaWF0IjoxNjA1NTI0OTkzfQ.E_70V52jXRF-dSNBhCawExXyvTnLuMljsWzjuWuSC9k";
+const headers = {
+  "Content-Type": "application/json",
+};
 
 function MainContainer() {
+  
   const [activeSection, setActiveSection] = useState("ecs_tourist_arrivals");
-  //TODO: quitar uno al mes
-  const [activeMonth, setActiveMonth] = useState(
-    validMonths.slice(-1)[0]
-  );
-
+  const [activeMonth, setActiveMonth] = useState(validMonths.slice(-1)[0]);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
-  // TODO: añadir state cumulative
+  const [showCumulative, setShowCumulative] = useState(false);
+
+  // useEffect(() => {
+  //   axios
+  //   .get(
+  //     `http://54.77.111.120:5300/data-grids/summary?token=${apiToken}`,
+  //     { headers: headers }
+  //   )
+  //   .then((result) => {
+  //     const months_set = new Set(result.data.map(x => x.month));
+  //     const active_months = [...months_set];
+  //     setActiveMonths(active_months);
+  //     setActiveMonth(active_months.slice(-1)[0]);
+  //   })
+
+  //   .catch((error) => {
+  //     console.log("axios error", error);
+  //   });
+  // });
 
   useEffect(() => {
     const noDataWarning = () => {
@@ -33,21 +54,13 @@ function MainContainer() {
       });
     };
     setLoading(true);
-    // PUBLIC API TOKEN (does not expire. Cannot perform actions other than reading)
-    const apiToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyb250ZW5kIiwiaWF0IjoxNjA1NTI0OTkzfQ.E_70V52jXRF-dSNBhCawExXyvTnLuMljsWzjuWuSC9k";
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    // let month = "2020-11"; //TODO get from datepicker
-
     axios
       .get(
         `http://54.77.111.120:5300/data-grids/month/${activeMonth}?token=${apiToken}`,
         { headers: headers }
       )
       .then((result) => {
+        console.log(JSON.stringify(result.data));
         setLoading(false);
         if (result.data.length === 0) {
           noDataWarning();
@@ -55,26 +68,48 @@ function MainContainer() {
         setData(result.data);
       })
 
-      .catch((error) => {
-        console.log("axios error", error);
+      .catch(function (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
       });
   }, [activeMonth]);
 
   const handleMenuSelection = (e) => {
-    setActiveSection(e.key);
+      setActiveSection(e.key);
   };
 
   const handleMonthSelection = (month) => {
+    console.log('Month', month)
     setActiveMonth(month);
   };
+
+  const handleCumulativeSelection = () => {
+    setShowCumulative(!showCumulative);
+  }
 
   return (
     <div>
       <MenuBar
         handleMenuSelection={handleMenuSelection}
         handleMonthSelection={handleMonthSelection}
+        handleCumulativeSelection={handleCumulativeSelection}
         validMonths={validMonths}
         activeMonth={activeMonth}
+        showCumulative={showCumulative}
         activeSection={activeSection}
       ></MenuBar>
       {loading ? (
@@ -85,6 +120,7 @@ function MainContainer() {
         <Dashboard
           data={data}
           activeSection={activeSection}
+          showCumulative={showCumulative}
           // handleLoading={handleLoading}
         ></Dashboard>
       )}

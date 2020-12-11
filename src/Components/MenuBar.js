@@ -1,21 +1,29 @@
 import React from "react";
 import { Menu } from "antd";
-import { Select } from 'antd';
+import { Select, Switch } from 'antd';
 
 import {
   BankTwoTone,
   ShopTwoTone,
   EnvironmentTwoTone,
+  CloseOutlined,
+  CheckOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
 const { Option } = Select;
 
 
-// TODO: añadir selector para acumulados
 const MenuBar = (props) => {
+  const setSwitchVisibility = () => {
+    // TODO: Create JSON with table props
+    if (['ens_energy_demand', 'ens_human_pressure', 'sos_affiliates', 'sos_unemployed', 'sos_temporality', 'sos_companies'].includes(props.activeSection))
+      return 'hidden'
+    else
+      return 'visible'
+  }
 
-    return (
+  return (
     <Menu
       onClick={props.handleMenuSelection}
       selectedKeys={[props.activeSection]}
@@ -62,14 +70,37 @@ const MenuBar = (props) => {
           Empreses d'alta al sector turístic
         </Menu.Item>
       </SubMenu>
-      <span style={{ marginRight: 100, float: "right" }}>
-        <span style={{ marginRight: 10, fontWeight: "bold" }}>MES</span>
-        <span>
-          <Select defaultValue={props.activeMonth} style={{ width: 120, fontWeight: "bold", borderWidth: 10 }} onChange={props.handleMonthSelection}>
-            {props.validMonths.map( (month) => (<Option value={month} >{month}</Option>))}
-          </Select>
-        </span>
-      </span>
+      <div style={{ width: '25%', float: "right" }}>
+        <div style={{ margin: 5, fontWeight: "bold" }}>
+          <div style={{ float: "left", marginRight: 5 }}>MES</div>
+          <div style={{ float: "left" }}>
+            <Select value={props.activeMonth} 
+              style={{ width: 120, fontWeight: "bold", borderWidth: 10 }} 
+              onChange={props.handleMonthSelection}>
+              {props.validMonths.map( (month) => (<Option value={month} >{month}</Option>))}
+            </Select>
+          </div>
+          <span>
+            <Switch
+              style={{ float: "right", margin: 10, marginRight: 30, visibility: setSwitchVisibility() }}
+              checkedChildren={
+                <div>
+                  {/* <CheckOutlined /> */}
+                  <div style={{ marginLeft: 5 }}>Acumulat</div>
+                </div>
+              }
+              unCheckedChildren={
+                <div>
+                  {/* <CloseOutlined /> */}
+                  <div style={{ marginRight: 5 }}>Acumulat</div>
+                </div>
+              }
+              onChange={props.handleCumulativeSelection}
+              defaultUnchecked
+            />
+            </span>
+          </div>
+        </div>
     </Menu>
   );
 };
