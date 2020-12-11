@@ -15,6 +15,13 @@ const { Option } = Select;
 
 
 const MenuBar = (props) => {
+  const setSwitchVisibility = () => {
+    // TODO: Create JSON with table props
+    if (['ens_energy_demand', 'ens_human_pressure', 'sos_affiliates', 'sos_unemployed', 'sos_temporality', 'sos_companies'].includes(props.activeSection))
+      return 'hidden'
+    else
+      return 'visible'
+  }
 
   return (
     <Menu
@@ -75,7 +82,7 @@ const MenuBar = (props) => {
           </div>
           <span>
             <Switch
-              style={{ float: "right", margin: 10, marginRight: 30 }}
+              style={{ float: "right", margin: 10, marginRight: 30, visibility: setSwitchVisibility() }}
               checkedChildren={
                 <div>
                   {/* <CheckOutlined /> */}
