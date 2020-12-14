@@ -5,9 +5,6 @@ import Dashboard from "./Dashboard";
 import { Spin, Space, message } from "antd";
 import axios from "axios";
 
-
-const validMonths=['2020-08', '2020-10']
-
 // PUBLIC API TOKEN (does not expire. Cannot perform actions other than reading)
 const apiToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyb250ZW5kIiwiaWF0IjoxNjA1NTI0OTkzfQ.E_70V52jXRF-dSNBhCawExXyvTnLuMljsWzjuWuSC9k";
@@ -16,43 +13,48 @@ const headers = {
 };
 
 function MainContainer() {
-  
+  // var active_month = months_list() ? months_list().slice(-1)[0] : null;
   const [activeSection, setActiveSection] = useState("ecs_tourist_arrivals");
-  const [activeMonth, setActiveMonth] = useState(validMonths.slice(-1)[0]);
+  const [activeMonth, setActiveMonth] = useState(null);
+  const [validMonths, setValidMonths] = useState(null);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [showCumulative, setShowCumulative] = useState(false);
 
-  // useEffect(() => {
-  //   axios
-  //   .get(
-  //     `http://54.77.111.120:5300/data-grids/summary?token=${apiToken}`,
-  //     { headers: headers }
-  //   )
-  //   .then((result) => {
-  //     const months_set = new Set(result.data.map(x => x.month));
-  //     const active_months = [...months_set];
-  //     setActiveMonths(active_months);
-  //     setActiveMonth(active_months.slice(-1)[0]);
-  //   })
-
-  //   .catch((error) => {
-  //     console.log("axios error", error);
-  //   });
-  // });
+  useEffect(() => {
+    axios
+    .get(
+      `http://54.77.111.120:5300/data-grids/summary?token=${apiToken}`,
+      { headers: headers }
+    )
+    .then((result) => {
+      const months_set = new Set(result.data.map(x => x.month));
+      const months_list = [...months_set];
+      setValidMonths(months_list);
+      setActiveMonth(months_list.slice(-1)[0])
+      // return months_list;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+    });
+  }, []);
 
   useEffect(() => {
-    const noDataWarning = () => {
-      message.info({
-        content: `No tenim dades del mes ${activeMonth}`,
-        className: "custom-class",
-        // TODO: disminuir duracion
-        duration: 10,
-        style: {
-          marginTop: 75,
-        },
-      });
-    };
     setLoading(true);
     axios
       .get(
@@ -60,14 +62,9 @@ function MainContainer() {
         { headers: headers }
       )
       .then((result) => {
-        console.log(JSON.stringify(result.data));
         setLoading(false);
-        if (result.data.length === 0) {
-          noDataWarning();
-        }
         setData(result.data);
       })
-
       .catch(function (error) {
         if (error.response) {
           // The request was made and the server responded with a status code
@@ -93,7 +90,6 @@ function MainContainer() {
   };
 
   const handleMonthSelection = (month) => {
-    console.log('Month', month)
     setActiveMonth(month);
   };
 
@@ -102,6 +98,7 @@ function MainContainer() {
   }
 
   return (
+    validMonths &&
     <div>
       <MenuBar
         handleMenuSelection={handleMenuSelection}
