@@ -6,8 +6,8 @@ import {
   BankTwoTone,
   ShopTwoTone,
   EnvironmentTwoTone,
-  CloseOutlined,
-  CheckOutlined,
+  // CloseOutlined,
+  // CheckOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -74,11 +74,13 @@ const MenuBar = (props) => {
         <div style={{ margin: 5, fontWeight: "bold" }}>
           <div style={{ float: "left", marginRight: 5 }}>MES</div>
           <div style={{ float: "left" }}>
-            <Select value={props.activeMonth} 
-              style={{ width: 120, fontWeight: "bold", borderWidth: 10 }} 
-              onChange={props.handleMonthSelection}>
-              {props.validMonths.map( (month) => (<Option value={month} >{month}</Option>))}
-            </Select>
+            {props.validMonths && props.activeMonth &&
+              <Select value={props.activeMonth} 
+                style={{ width: 120, fontWeight: "bold", borderWidth: 10 }} 
+                onChange={props.handleMonthSelection}>
+                {props.validMonths.map( (month) => (<Option value={month} >{month}</Option>))}
+              </Select>
+            }
           </div>
           <span>
             <Switch
