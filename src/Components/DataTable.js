@@ -21,6 +21,8 @@ const DataTable = (props) => {
       variation_menorca: columnsNr > 5 ? row.values[5] : null,
       total_ib_for: columnsNr > 6 ? row.values[6] : null,
       variation_ib_for: columnsNr > 7 ? row.values[7] : null,
+      total_formentera: columnsNr > 8 ? row.values[8] : null,
+      variation_formentera: columnsNr > 9 ? row.values[9] : null,
     };
   });
 
@@ -103,6 +105,17 @@ const DataTable = (props) => {
       title: columnsNr > 7 ? selectedDataSet.columns[7].ca : null,
       dataIndex: "variation_ib_for",
       key: "variation_ib_for",
+      render: (text) => showArrows(text),
+    },
+    {
+      title: columnsNr > 8 ? selectedDataSet.columns[8].ca : null,
+      dataIndex: "total_formentera",
+      key: "total_formentera",
+    },
+    {
+      title: columnsNr > 9 ? selectedDataSet.columns[9].ca : null,
+      dataIndex: "variation_formentera",
+      key: "variation_formentera",
       render: (text) => showArrows(text),
     },
   ];
