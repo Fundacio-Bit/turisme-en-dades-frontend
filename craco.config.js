@@ -9,7 +9,15 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            modifyVars: { "@primary-color": "#586BA4" },
+            modifyVars: {
+              "@primary-color": "#586BA4",
+              // Background color for `<body>
+              "@body-background": "#E5E5E5",
+              // Base background color for most components
+              "@component-background": "#E5E5E5",
+              "@table-header-bg": "#E5E5E5",
+              "@table-footer-bg": "#E5E5E5",
+            },
             javascriptEnabled: true,
           },
         },
