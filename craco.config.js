@@ -12,11 +12,11 @@ module.exports = {
             modifyVars: {
               "@primary-color": "#586BA4",
               // Background color for `<body>
-              "@body-background": "#E5E5E5",
+              "@body-background": "#EAE6CA",
               // Base background color for most components
-              "@component-background": "#E5E5E5",
-              "@table-header-bg": "#E5E5E5",
-              "@table-footer-bg": "#E5E5E5",
+              "@component-background": "#EAE6CA",
+              "@table-header-bg": "#EAE6CA",
+              "@table-footer-bg": "#EAE6CA",
             },
             javascriptEnabled: true,
           },
