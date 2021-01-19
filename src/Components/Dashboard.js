@@ -54,11 +54,15 @@ const Dashboard = (props) => {
         };
 
         return (
-          <div style={{ padding: 20 }}>
+          <div>
             {props.data && touristArrivalChartsData() && (
-              <TouristArrivalsChartsContainer
-                data={touristArrivalChartsData()}
-              ></TouristArrivalsChartsContainer>
+            <div className="ant-row">
+              <div className="ant-col ant-col-xl-24">
+                <TouristArrivalsChartsContainer
+                  data={touristArrivalChartsData()}
+                ></TouristArrivalsChartsContainer>
+              </div>
+            </div>
             )}
             {props.data &&
               getTableDataByChartId(props.data, "ecs_tourist_arrivals_total") &&
@@ -66,19 +70,23 @@ const Dashboard = (props) => {
                 props.data,
                 "ecs_tourist_arrivals_cumulative"
               ) && (
-                <DataTable
-                  showCumulative={props.showCumulative}
-                  data={[
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_tourist_arrivals_total"
-                    ),
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_tourist_arrivals_cumulative"
-                    ),
-                  ]}
-                ></DataTable>
+              <div className="ant-row">
+                <div className="ant-col ant-col-xl-24">
+                  <DataTable
+                    showCumulative={props.showCumulative}
+                    data={[
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_tourist_arrivals_total"
+                      ),
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_tourist_arrivals_cumulative"
+                      ),
+                    ]}
+                  ></DataTable>
+              </div>
+             </div>
               )}
           </div>
         );
@@ -134,110 +142,124 @@ const Dashboard = (props) => {
         console.log("CHART DATA", spendingChartsData());
 
         return (
-          <div style={{ padding: 20 }}>
-            {props.data && spendingChartsData() && (
-              <SpendingChartsContainer
-                data={spendingChartsData()}
-              ></SpendingChartsContainer>
-            )}
-            {props.data &&
-              getTableDataByChartId(
-                props.data,
-                "ecs_spending_countries_total"
-              ) &&
-              getTableDataByChartId(
-                props.data,
-                "ecs_spending_countries_cumulative"
-              ) && (
-                <DataTable
-                  showCumulative={props.showCumulative}
-                  data={[
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_spending_countries_total"
-                    ),
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_spending_countries_cumulative"
-                    ),
-                  ]}
-                ></DataTable>
+          <div>
+            <div className="ant-row" style={{ padding: 20 }}>
+              <div className="ant-col ant-col-xs-24 ant-col-xl-24">
+              {props.data && spendingChartsData() && (
+                <SpendingChartsContainer
+                  data={spendingChartsData()}
+                ></SpendingChartsContainer>
               )}
+              </div>
+            </div>
+            <div className="ant-row" style={{ padding: 20 }}>
+              <div className="ant-col ant-col-xs-24 ant-col-xl-24">
+              {props.data &&
+                getTableDataByChartId(
+                  props.data,
+                  "ecs_spending_countries_total"
+                ) &&
+                getTableDataByChartId(
+                  props.data,
+                  "ecs_spending_countries_cumulative"
+                ) && (
+                  <DataTable
+                    showCumulative={props.showCumulative}
+                    data={[
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_spending_countries_total"
+                      ),
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_spending_countries_cumulative"
+                      ),
+                    ]}
+                  ></DataTable>
+                )}
+              </div>
+              <div className="ant-col ant-col-xs-24 ant-col-xl-24">
+              {props.data &&
+                getTableDataByChartId(props.data, "ecs_spending_islands_total") &&
+                getTableDataByChartId(
+                  props.data,
+                  "ecs_spending_islands_cumulative"
+                ) && (
+                  <DataTable
+                    showCumulative={props.showCumulative}
+                    data={[
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_spending_islands_total"
+                      ),
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_spending_islands_cumulative"
+                      ),
+                    ]}
+                  ></DataTable>
+                )}
 
-            {props.data &&
-              getTableDataByChartId(props.data, "ecs_spending_islands_total") &&
-              getTableDataByChartId(
-                props.data,
-                "ecs_spending_islands_cumulative"
-              ) && (
-                <DataTable
-                  showCumulative={props.showCumulative}
-                  data={[
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_spending_islands_total"
-                    ),
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_spending_islands_cumulative"
-                    ),
-                  ]}
-                ></DataTable>
-              )}
+                </div>
+              <div className="ant-col ant-col-xs-24 ant-col-xl-24">
+              {props.data &&
+                getTableDataByChartId(
+                  props.data,
+                  "ecs_spending_stays_countries_total"
+                ) &&
+                getTableDataByChartId(
+                  props.data,
+                  "ecs_spending_stays_countries_cumulative"
+                ) && (
+                  <DataTable
+                    showCumulative={props.showCumulative}
+                    data={[
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_spending_stays_countries_total"
+                      ),
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_spending_stays_countries_cumulative"
+                      ),
+                    ]}
+                  ></DataTable>
+                )}
 
-            {props.data &&
-              getTableDataByChartId(
-                props.data,
-                "ecs_spending_stays_countries_total"
-              ) &&
-              getTableDataByChartId(
-                props.data,
-                "ecs_spending_stays_countries_cumulative"
-              ) && (
-                <DataTable
-                  showCumulative={props.showCumulative}
-                  data={[
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_spending_stays_countries_total"
-                    ),
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_spending_stays_countries_cumulative"
-                    ),
-                  ]}
-                ></DataTable>
-              )}
-
-            {props.data &&
-              getTableDataByChartId(
-                props.data,
-                "ecs_spending_stays_islands_total"
-              ) &&
-              getTableDataByChartId(
-                props.data,
-                "ecs_spending_stays_islands_cumulative"
-              ) && (
-                <DataTable
-                  showCumulative={props.showCumulative}
-                  data={[
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_spending_stays_islands_total"
-                    ),
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_spending_stays_islands_cumulative"
-                    ),
-                  ]}
-                ></DataTable>
-              )}
+              </div>
+              <div className="ant-col ant-col-xs-24 ant-col-xl-24">
+              {props.data &&
+                getTableDataByChartId(
+                  props.data,
+                  "ecs_spending_stays_islands_total"
+                ) &&
+                getTableDataByChartId(
+                  props.data,
+                  "ecs_spending_stays_islands_cumulative"
+                ) && (
+                  <DataTable
+                    showCumulative={props.showCumulative}
+                    data={[
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_spending_stays_islands_total"
+                      ),
+                      getTableDataByChartId(
+                        props.data,
+                        "ecs_spending_stays_islands_cumulative"
+                      ),
+                    ]}
+                  ></DataTable>
+                )}
+              </div>
+            </div>
           </div>
         );
 
       case "ecs_occupancy":
         return (
-          <div style={{ padding: 20 }}>
+          <div className="ant-row" style={{ padding: 20 }}>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(props.data, "ecs_occupancy_total") &&
               getTableDataByChartId(props.data, "ecs_occupancy_cumulative") && (
@@ -252,12 +274,14 @@ const Dashboard = (props) => {
                   ]}
                 ></DataTable>
               )}
+              </div>
           </div>
         );
 
       case "ecs_air_passengers_arrivals":
         return (
-          <div style={{ padding: 20 }}>
+          <div className="ant-row" style={{ padding: 20 }}>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(
                 props.data,
@@ -281,12 +305,14 @@ const Dashboard = (props) => {
                   ]}
                 ></DataTable>
               )}
+            </div>
           </div>
         );
 
       case "ecs_sea_passengers_arrivals":
         return (
-          <div style={{ padding: 20 }}>
+          <div className="ant-row" style={{ padding: 20 }} style={{ padding: 20 }}>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(
                 props.data,
@@ -310,7 +336,8 @@ const Dashboard = (props) => {
                   ]}
                 ></DataTable>
               )}
-
+            </div>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(
                 props.data,
@@ -334,7 +361,8 @@ const Dashboard = (props) => {
                   ]}
                 ></DataTable>
               )}
-
+            </div>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(
                 props.data,
@@ -358,7 +386,8 @@ const Dashboard = (props) => {
                   ]}
                 ></DataTable>
               )}
-
+            </div>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(
                 props.data,
@@ -382,12 +411,14 @@ const Dashboard = (props) => {
                   ]}
                 ></DataTable>
               )}
+            </div>
           </div>
         );
 
       case "ens_energy_demand":
         return (
-          <div style={{ padding: 20 }}>
+          <div className="ant-row" style={{ padding: 20 }}>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(props.data, "ens_energy_total") && (
                 <DataTable
@@ -395,11 +426,13 @@ const Dashboard = (props) => {
                   data={[getTableDataByChartId(props.data, "ens_energy_total")]}
                 ></DataTable>
               )}
+              </div>
           </div>
         );
       case "ens_human_pressure":
         return (
-          <div style={{ padding: 20 }}>
+          <div className="ant-row" style={{ padding: 20 }}>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(props.data, "ens_human_pressure_total") && (
                 <DataTable
@@ -412,11 +445,13 @@ const Dashboard = (props) => {
                   ]}
                 ></DataTable>
               )}
+            </div>
           </div>
         );
       case "sos_affiliates":
         return (
-          <div style={{ padding: 20 }}>
+          <div className="ant-row" style={{ padding: 20 }}>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(props.data, "sos_affiliates") && (
                 <DataTable
@@ -424,11 +459,13 @@ const Dashboard = (props) => {
                   data={[getTableDataByChartId(props.data, "sos_affiliates")]}
                 ></DataTable>
               )}
+            </div>
           </div>
         );
       case "sos_unemployed":
         return (
-          <div style={{ padding: 20 }}>
+          <div className="ant-row" style={{ padding: 20 }}>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(props.data, "sos_unemployed") && (
                 <DataTable
@@ -436,11 +473,13 @@ const Dashboard = (props) => {
                   data={[getTableDataByChartId(props.data, "sos_unemployed")]}
                 ></DataTable>
               )}
+            </div>
           </div>
         );
       case "sos_temporality":
         return (
-          <div style={{ padding: 20 }}>
+          <div className="ant-row" style={{ padding: 20 }}>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(props.data, "sos_temporality") && (
                 <DataTable
@@ -448,11 +487,13 @@ const Dashboard = (props) => {
                   data={[getTableDataByChartId(props.data, "sos_temporality")]}
                 ></DataTable>
               )}
+            </div>
           </div>
         );
       case "sos_companies":
         return (
-          <div style={{ padding: 20 }}>
+          <div className="ant-row" style={{ padding: 20 }}>
+            <div className="ant-col ant-col-xs-24 ant-col-xl-24">
             {props.data &&
               getTableDataByChartId(props.data, "sos_companies") && (
                 <DataTable
@@ -460,6 +501,7 @@ const Dashboard = (props) => {
                   data={[getTableDataByChartId(props.data, "sos_companies")]}
                 ></DataTable>
               )}
+            </div>
           </div>
         );
 

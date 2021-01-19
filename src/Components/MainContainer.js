@@ -100,27 +100,27 @@ function MainContainer() {
   return (
     validMonths &&
     <div>
-      <MenuBar
-        handleMenuSelection={handleMenuSelection}
-        handleMonthSelection={handleMonthSelection}
-        handleCumulativeSelection={handleCumulativeSelection}
-        validMonths={validMonths}
-        activeMonth={activeMonth}
-        showCumulative={showCumulative}
-        activeSection={activeSection}
-      ></MenuBar>
-      {loading ? (
-        <Space size="middle" style={{ marginTop: 200 }}>
-          <Spin size="large" />
-        </Space>
-      ) : (
-        <Dashboard
-          data={data}
-          activeSection={activeSection}
+        <MenuBar
+          handleMenuSelection={handleMenuSelection}
+          handleMonthSelection={handleMonthSelection}
+          handleCumulativeSelection={handleCumulativeSelection}
+          validMonths={validMonths}
+          activeMonth={activeMonth}
           showCumulative={showCumulative}
-          // handleLoading={handleLoading}
-        ></Dashboard>
-      )}
+          activeSection={activeSection}
+        ></MenuBar>
+        {loading ? (
+          <Space size="middle" style={{ marginTop: 200 }}>
+            <Spin size="large" />
+          </Space>
+        ) : (
+          <Dashboard
+            data={data}
+            activeSection={activeSection}
+            showCumulative={showCumulative}
+            // handleLoading={handleLoading}
+          ></Dashboard>
+        )}
     </div>
   );
 }

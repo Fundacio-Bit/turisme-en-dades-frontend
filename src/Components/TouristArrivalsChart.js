@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { PieChart, Pie, Sector, Cell } from "recharts";
+import { ResponsiveContainer } from "recharts";
+
 
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -95,24 +97,26 @@ const TouristArrivalsChart = (props) => {
   ];
 
   return (
-    <PieChart width={500} height={300}>
-      <Pie
-        activeIndex={activeIndex}
-        activeShape={renderActiveShape}
-        data={props.data.slice(0, -1)}
-        cx="50%"
-        cy="50%"
-        innerRadius={60}
-        outerRadius={90}
-        fill="#586BA4"
-        dataKey="value"
-        onMouseEnter={onPieEnter}
-      >
-        {props.data.slice(0, -1).map((entry, index) => (
-          <Cell fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-    </PieChart>
+    <ResponsiveContainer width='100%' height={300}>
+      <PieChart>
+        <Pie
+          activeIndex={activeIndex}
+          activeShape={renderActiveShape}
+          data={props.data.slice(0, -1)}
+          cx="50%"
+          cy="50%"
+          innerRadius={60}
+          outerRadius={90}
+          fill="#586BA4"
+          dataKey="value"
+          onMouseEnter={onPieEnter}
+        >
+          {props.data.slice(0, -1).map((entry, index) => (
+            <Cell fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+      </PieChart>
+    </ResponsiveContainer>
   );
 };
 

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table } from "antd";
 import {
   ArrowUpOutlined,
   ArrowDownOutlined,
   ArrowRightOutlined,
 } from "@ant-design/icons";
+import "../style.css";
 
 const DataTable = (props) => {
+
   let selectedDataSet = props.data.length === 2 && props.showCumulative ? props.data[1] : props.data[0];
   let columnsNr = selectedDataSet.columns.length;
   const formattedRows = selectedDataSet.rows.map((row, i) => {
@@ -148,31 +150,11 @@ const DataTable = (props) => {
           }}
         >
           <span style={{ marginRight: 30 }}> {selectedDataSet.title.ca}</span>
-          {/* {props.data.length === 2 && (
-            <span>
-              <Switch
-                style={{ float: "right", marginRight: 50 }}
-                checkedChildren={
-                  <div>
-                    <CheckOutlined />
-                    <span style={{ marginLeft: 5 }}>Acumulat</span>
-                  </div>
-                }
-                unCheckedChildren={
-                  <div>
-                    <span style={{ marginRight: 5 }}>Acumulat</span>
-                    <CloseOutlined />
-                  </div>
-                }
-                onChange={() => setShowCumulative(!showCumulative)}
-                defaultUnchecked
-              />
-            </span>
-          )} */}
         </h4>
       </span>
 
       <Table
+        style={{ overflow: 'auto' }}
         dataSource={formattedRows}
         columns={columns.slice(0, columnsNr + 1)}
         pagination={false}

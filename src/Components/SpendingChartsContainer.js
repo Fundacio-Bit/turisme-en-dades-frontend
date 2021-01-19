@@ -1,26 +1,29 @@
 import React from "react";
 import SpendingChart from "./SpendingChart";
 import { Row, Col } from "antd";
-import { ResponsiveContainer } from "recharts";
 
 const SpendingChartsContainer = (props) => {
   const data = props.data;
   return (
     <div style={{ margin: "2%" }}>
-      {" "}
-      <h4
-        style={{
-          textAlign: "left",
-          color: "#586BA4",
-          fontWeight: 500,
-          fontSize: 21,
-          marginBottom: 20,
-        }}
-      >
-        {props.data.title.ca}
-      </h4>
-      <Row style={{ textAlign: "center" }}>
-        <Col span={8}>
+      <div className="ant-row">
+        <div className="ant-col ant-col-xl-24">
+          {" "}
+          <h4
+            style={{
+              textAlign: "left",
+              color: "#586BA4",
+              fontWeight: 500,
+              fontSize: 21,
+              marginBottom: 20,
+            }}
+          >
+            {props.data.title.ca}
+          </h4>
+          </div>
+      </div>
+      <div className="ant-row">
+        <div className="ant-col ant-col-xl-8">
           <div>
             <h2 style={{ color: "#586BA4", marginBottom: 0, fontSize: 19 }}>
               Despesa total (milions d'€)
@@ -31,15 +34,13 @@ const SpendingChartsContainer = (props) => {
               )}{" "}
               milions d'€
             </h3>
-            <ResponsiveContainer>
-              <SpendingChart
-                data={data.total}
-                title="Despesa total (milions d'€)"
-              ></SpendingChart>
-            </ResponsiveContainer>
+            <SpendingChart
+              data={data.total}
+              title="Despesa total (milions d'€)"
+            ></SpendingChart>
           </div>
-        </Col>
-        <Col span={8}>
+        </div>
+        <div className="ant-col ant-col-xl-8">
           <div>
             <h2 style={{ color: "#586BA4", marginBottom: 0, fontSize: 19 }}>
               Despesa per persona (€)
@@ -50,15 +51,13 @@ const SpendingChartsContainer = (props) => {
               )}{" "}
               €
             </h3>
-            <ResponsiveContainer>
-              <SpendingChart
-                data={data.person}
-                title="Despesa per persona (€)"
-              ></SpendingChart>
-            </ResponsiveContainer>
+            <SpendingChart
+              data={data.person}
+              title="Despesa per persona (€)"
+            ></SpendingChart>
           </div>
-        </Col>
-        <Col span={8}>
+        </div>
+        <div className="ant-col ant-col-xl-8">
           <div>
             <h2 style={{ color: "#586BA4", marginBottom: 0, fontSize: 19 }}>
               Despesa per persona i dia (€)
@@ -69,15 +68,13 @@ const SpendingChartsContainer = (props) => {
               )}{" "}
               €
             </h3>
-            <ResponsiveContainer>
-              <SpendingChart
-                data={data.person_day}
-                title="Despesa per persona i dia (€)"
-              ></SpendingChart>
-            </ResponsiveContainer>
+            <SpendingChart
+              data={data.person_day}
+              title="Despesa per persona i dia (€)"
+            ></SpendingChart>
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };
