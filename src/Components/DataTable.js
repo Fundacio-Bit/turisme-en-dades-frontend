@@ -27,6 +27,7 @@ const DataTable = (props) => {
   });
 
   const showArrows = (text) => {
+    console.log("Text: ", text)
     if (parseFloat(text.replace(".", "").replace(",", ".")) > 0) {
       return (
         <div>
