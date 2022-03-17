@@ -30,7 +30,7 @@ const Dashboard = (props) => {
                 .map((sector) => {
                   return {
                     name: sector.name.ca,
-                    value: parseFloat(sector.values[2]),
+                    value: parseFloat(sector.values[2].replace(/\./g,'')),
                   };
                 }),
               menorca: chartDataRaw.rows
@@ -38,7 +38,7 @@ const Dashboard = (props) => {
                 .map((sector) => {
                   return {
                     name: sector.name.ca,
-                    value: parseFloat(sector.values[4]),
+                    value: parseFloat(sector.values[4].replace(/\./g,'')),
                   };
                 }),
               ibiza_formentera: chartDataRaw.rows
@@ -46,7 +46,7 @@ const Dashboard = (props) => {
                 .map((sector) => {
                   return {
                     name: sector.name.ca,
-                    value: parseFloat(sector.values[6]),
+                    value: parseFloat(sector.values[6].replace(/\./g,'')),
                   };
                 }),
             };
