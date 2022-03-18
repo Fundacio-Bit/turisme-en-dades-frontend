@@ -85,8 +85,8 @@ const Dashboard = (props) => {
       case "ecs_spending":
         var spendingChartDataRaw = null;
         props.showCumulative?
-          spendingChartDataRaw = getTableDataByChartId( props.data, "ecs_spending_countries_total" )
-          : spendingChartDataRaw = getTableDataByChartId( props.data, "ecs_spending_countries_cumulative" )
+          spendingChartDataRaw = getTableDataByChartId( props.data, "ecs_spending_countries_cumulative" )
+          : spendingChartDataRaw = getTableDataByChartId( props.data, "ecs_spending_countries_total" )
 
 
         const spendingChartsData = () => {

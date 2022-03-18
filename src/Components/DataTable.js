@@ -149,27 +149,6 @@ const DataTable = (props) => {
           }}
         >
           <span style={{ marginRight: 30 }}> {selectedDataSet.title.ca}</span>
-          {/* {props.data.length === 2 && (
-            <span>
-              <Switch
-                style={{ float: "right", marginRight: 50 }}
-                checkedChildren={
-                  <div>
-                    <CheckOutlined />
-                    <span style={{ marginLeft: 5 }}>Acumulat</span>
-                  </div>
-                }
-                unCheckedChildren={
-                  <div>
-                    <span style={{ marginRight: 5 }}>Acumulat</span>
-                    <CloseOutlined />
-                  </div>
-                }
-                onChange={() => setShowCumulative(!showCumulative)}
-                defaultUnchecked
-              />
-            </span>
-          )} */}
         </h4>
       </span>
 
