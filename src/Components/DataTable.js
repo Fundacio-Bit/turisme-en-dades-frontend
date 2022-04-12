@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons";
 
 const DataTable = (props) => {
+  // console.log("DATA: ", props.data)
   let selectedDataSet = props.data.length === 2 && props.showCumulative ? props.data[1] : props.data[0];
   let columnsNr = selectedDataSet.columns.length;
   const formattedRows = selectedDataSet.rows.map((row, i) => {
@@ -27,34 +28,36 @@ const DataTable = (props) => {
   });
 
   const showArrows = (text) => {
-    console.log("Text: ", text)
-    if (parseFloat(text.replace(".", "").replace(",", ".")) > 0) {
-      return (
-        <div>
-          <span style={{ marginRight: 10 }}>{text}</span>
-          <ArrowUpOutlined style={{ color: "#586ba4" }} />
-        </div>
-      );
-    } else if (parseFloat(text.replace(".", "").replace(",", ".")) < 0) {
-      return (
-        <div>
-          <span style={{ marginRight: 10 }}>{text}</span>
-          <ArrowDownOutlined style={{ color: "#CB4235" }} />
-        </div>
-      );
-    } else if (parseFloat(text.replace(".", "").replace(",", ".")) === 0) {
-      return (
-        <div>
-          <span style={{ marginRight: 10 }}>{text}</span>
-          <ArrowRightOutlined style={{ color: "#f68e5f" }} />
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <span style={{ marginRight: 10 }}>{text}</span>
-        </div>
-      );
+    if (text) {
+      let formattedText = text.replace(/\./g,'').replace(",", ".")
+      if (formattedText.length >0 && parseFloat(formattedText) > 0) {
+        return (
+          <div>
+            <span style={{ marginRight: 10 }}>{text}</span>
+            <ArrowUpOutlined style={{ color: "#586ba4" }} />
+          </div>
+        );
+      } else if (formattedText.length >0 && parseFloat(formattedText) < 0) {
+        return (
+          <div>
+            <span style={{ marginRight: 10 }}>{text}</span>
+            <ArrowDownOutlined style={{ color: "#CB4235" }} />
+          </div>
+        );
+      } else if (formattedText.length >0 && parseFloat(formattedText) === 0) {
+        return (
+          <div>
+            <span style={{ marginRight: 10 }}>{text}</span>
+            <ArrowRightOutlined style={{ color: "#f68e5f" }} />
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <span style={{ marginRight: 10 }}>{text}</span>
+          </div>
+        );
+      }
     }
   };
 
