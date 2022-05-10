@@ -30,6 +30,8 @@ function MainContainer() {
     .then((result) => {
       const months_set = new Set(result.data.map(x => x.month));
       const months_list = [...months_set];
+      // // TODO: Remove console.log: the pop() method removes the last element from an array and returns that element. This method changes the length of the array.
+      // console.log(months_list.pop())
       setValidMonths(months_list);
       setActiveMonth(months_list.slice(-1)[0])
       // return months_list;

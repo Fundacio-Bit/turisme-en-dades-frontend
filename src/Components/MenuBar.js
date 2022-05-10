@@ -75,7 +75,7 @@ const MenuBar = (props) => {
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} style={{ backgroundColor: "white" , padding: "1em"}}>
           <Col className="gutter-row" span={12}>
             <div style={{ margin: "0.5em", fontWeight: "bold" }}>
-              <div style={{ float: "left", marginRight: "0.5em", marginTop: "0.5em" }}>MES</div>
+              <div style={{ float: "left", marginRight: "0.5em", marginTop: "0.5em" }}>Informe del mes</div>
               <div style={{ float: "left" }}>            
                 {/* <div style={{ margin: "0.5em", fontWeight: "bold" }}>MES</div> */}
           {/* </Col>
