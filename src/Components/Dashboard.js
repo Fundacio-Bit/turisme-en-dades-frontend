@@ -401,6 +401,18 @@ const Dashboard = (props) => {
         return (
           <div style={{ padding: 20 }}>
             {props.data &&
+            getTableDataByChartId(props.data, "ens_human_pressure_monthly_total") && (
+              <DataTable
+                showCumulative={props.showCumulative}
+                data={[
+                  getTableDataByChartId(
+                    props.data,
+                    "ens_human_pressure_monthly_total"
+                  ),
+                ]}
+              ></DataTable>
+            )}
+            {props.data &&
               getTableDataByChartId(props.data, "ens_human_pressure_total") && (
                 <DataTable
                   showCumulative={props.showCumulative}
