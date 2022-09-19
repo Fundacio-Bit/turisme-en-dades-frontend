@@ -239,19 +239,23 @@ const Dashboard = (props) => {
         return (
           <div style={{ padding: 20 }}>
             {props.data &&
-              getTableDataByChartId(props.data, "ecs_occupancy_total") &&
-              getTableDataByChartId(props.data, "ecs_occupancy_cumulative") && (
+              getTableDataByChartId(props.data, "ecs_occupancy_total") && !props.showCumulative &&
                 <DataTable
                   showCumulative={props.showCumulative}
                   data={[
                     getTableDataByChartId(props.data, "ecs_occupancy_total"),
-                    getTableDataByChartId(
-                      props.data,
-                      "ecs_occupancy_cumulative"
-                    ),
                   ]}
                 ></DataTable>
-              )}
+            }
+            {props.data &&
+              getTableDataByChartId(props.data, "ecs_occupancy_cumulative") && props.showCumulative &&
+                <DataTable
+                  showCumulative={props.showCumulative}
+                  data={[
+                    getTableDataByChartId(props.data, "ecs_occupancy_cumulative"),
+                  ]}
+                ></DataTable>
+              }
           </div>
         );
 
